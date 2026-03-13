@@ -1,0 +1,68 @@
+footer {
+    margin-top: auto; // Pushes footer down in flex layouts
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    background-color: var(--bs-tertiary-bg);
+    border-top: 1px solid rgba(var(--bs-emphasis-color-rgb), 0.05);
+
+    .footer-logo {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        display: block;
+        text-decoration: none;
+        color: var(--bs-emphasis-color);
+    }
+
+    // Social Icons Styling
+    .social-links {
+        display: flex;
+        gap: 1rem;
+
+        .btn-social {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(var(--primary-rgb), 0.1);
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            text-decoration: none;
+
+            &:hover {
+                background: var(--primary-color);
+                color: white;
+                transform: translateY(-3px);
+            }
+        }
+    }
+
+    // Quick Links
+    .footer-links {
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin-bottom: 0.5rem;
+
+            a {
+                color: var(--bs-secondary-color);
+                text-decoration: none;
+                transition: color 0.2s ease;
+
+                &:hover {
+                    color: var(--primary-color);
+                }
+            }
+        }
+    }
+
+    .copyright {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(var(--bs-emphasis-color-rgb), 0.05);
+        font-size: 0.9rem;
+        color: var(--bs-secondary-color);
+    }
+}

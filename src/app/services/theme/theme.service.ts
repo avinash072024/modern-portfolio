@@ -1,0 +1,32 @@
+import { effect, Injectable, signal } from '@angular/core';
+import { Constants } from '../../models/constants';
+import { SessionService } from '../session/session.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ThemeService {
+  // Signals for reactive state
+  theme = signal(localStorage.getItem(Constants.THEME_KEY) || 'light');
+  skin = signal(localStorage.getItem(Constants.SKIN_KEY) || 'default-blue');
+
+  constructor(private sessionService: SessionService) {
+    // Automatically update DOM and localStorage when signals change
+    effect(() => {
+      document.documentElement.setAttribute('data-bs-theme', this.theme());
+      document.documentElement.setAttribute('data-skin', this.skin());
+      localStorage.setItem(Constants.THEME_KEY, this.theme());
+      localStorage.setItem(Constants.SKIN_KEY, this.skin());
+    });
+  }
+
+  toggleTheme() {
+    this.theme.set(this.theme() === 'light' ? 'dark' : 'light');
+    this.sessionService.setThemeSession(this.theme());
+  }
+
+  setSkin(color: string) {
+    this.skin.set(color);
+    this.sessionService.setSkinSession(this.skin())
+  }
+}

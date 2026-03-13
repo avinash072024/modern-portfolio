@@ -1,0 +1,51 @@
+// Testimonial Auto-Scroll Animation
+.testimonial-track {
+    display: flex;
+    width: calc(350px * 12); // Adjust based on card count
+    animation: scroll 40s linear infinite;
+
+    &:hover {
+        animation-play-state: paused;
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-350px * 6));
+    }
+}
+
+.testimonial-slide {
+    width: 350px;
+    flex-shrink: 0;
+
+    .card {
+        background: var(--bs-body-bg);
+        border-top: 4px solid var(--primary-color) !important;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: translateY(-10px);
+        }
+    }
+}
+
+// Sub-section background logic
+.bg-body-tertiary {
+    background-color: var(--bs-tertiary-bg) !important;
+}
+
+.bg-light-subtle {
+    background-color: rgba(var(--primary-rgb), 0.05) !important;
+}
+
+// Dark theme override for card text
+[data-bs-theme="dark"] {
+    .text-secondary {
+        color: #adb5bd !important;
+    }
+}

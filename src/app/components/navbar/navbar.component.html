@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg fixed-top transition-all" [class.scrolled]="isScrolled()">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-4" routerLink="/">
+            {{appName1}}<span class="text-primary"> {{appName2}}.</span>
+        </a>
+
+        <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navContent">
+            <i class="bi bi-list fs-2 text-primary"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <!-- <li class="nav-item"><a class="nav-link px-3" routerLink="/" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-3" routerLink="/about" routerLinkActive="active">About</a>
+                </li>
+                <li class="nav-item"><a class="nav-link px-3" routerLink="/portfolio"
+                        routerLinkActive="active">Portfolio</a></li>
+                <li class="nav-item"><a class="nav-link px-3" routerLink="/contact"
+                        routerLinkActive="active">Contact</a></li> -->
+                @for (item of navLinks; track item.id; let i = $index ) {
+                <li class="nav-item"><a class="nav-link px-3" [routerLink]="item.path" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">{{item.label}}</a></li>
+                }
+            </ul>
+
+            <div class="dropdown">
+                <button class="btn btn-settings dropdown-toggle d-flex align-items-center gap-2" type="button"
+                    data-bs-toggle="dropdown">
+                    <i class="bi bi-palette-fill"></i>
+                    <span class="d-lg-none">Customization</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-start shadow-lg border-0 p-3 mt-3">
+                    <li class="mb-3">
+                        <h6 class="dropdown-header px-0 mb-2">Appearance</h6>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm flex-grow-1 theme-btn"
+                                [class.active]="themeService.theme() === 'light'" (click)="themeService.toggleTheme()">
+                                <i class="bi bi-sun"></i> Light
+                            </button>
+                            <button class="btn btn-sm flex-grow-1 theme-btn"
+                                [class.active]="themeService.theme() === 'dark'" (click)="themeService.toggleTheme()">
+                                <i class="bi bi-moon-stars"></i> Dark
+                            </button>
+                        </div>
+                    </li>
+                    <hr class="dropdown-divider">
+                    <li>
+                        <h6 class="dropdown-header px-0 mb-2">Accent Color</h6>
+                        <div class="skin-grid">
+                            @for (skin of skins; track skin.class) {
+                            <button class="skin-circle" [style.background-color]="skin.hex"
+                                [class.active]="themeService.skin() === skin.class"
+                                (click)="themeService.setSkin(skin.class)" [title]="skin.name">
+                            </button>
+                            }
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
