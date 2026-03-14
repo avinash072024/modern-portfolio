@@ -11,7 +11,7 @@ export class AboutComponent {
   techStack = [
     { name: 'Angular', icon: 'bi-patch-check', level: '95%' },
     { name: 'TypeScript', icon: 'bi-code-slash', level: '90%' },
-    { name: 'Bootstrap 5', icon: 'bi-bootstrap', level: '95%' },
+    { name: 'Bootstrap', icon: 'bi-bootstrap', level: '95%' },
     { name: 'Node.js', icon: 'bi-server', level: '80%' },
     { name: 'Firebase', icon: 'bi-cloud', level: '85%' },
     { name: 'UI/UX', icon: 'bi-palette', level: '88%' }

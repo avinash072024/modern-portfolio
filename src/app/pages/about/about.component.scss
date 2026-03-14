@@ -12,8 +12,8 @@
         .edu-item {
             .dot {
                 position: absolute;
-                left: -24px; // Aligns with border-start
-                top: 5px;
+                left: -23.5px; // Aligns with border-start
+                // top: 5px;
                 width: 14px;
                 height: 14px;
                 border-radius: 50%;
@@ -41,7 +41,7 @@
 
     .progress {
         background-color: rgba(var(--primary-rgb), 0.1);
-        overflow: visible;
+        // overflow: visible;
 
         .progress-bar {
             border-radius: 10px;

@@ -1,0 +1,66 @@
+.contact-section {
+    .bento-wrapper {
+        border-color: rgba(var(--primary-rgb), 0.1) !important;
+    }
+
+    .contact-info {
+        background: linear-gradient(135deg, var(--primary-color) 0%, color-mix(in srgb, var(--primary-color), black 20%) 100%);
+        display: flex;
+        flex-direction: column;
+
+        .icon-box {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .social-circle {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: white;
+                color: var(--primary-color);
+                transform: translateY(-5px);
+            }
+        }
+    }
+
+    // Modern Floating Labels
+    .form-control {
+        background-color: var(--bs-body-bg);
+        border: 2px solid transparent;
+        border-radius: 15px;
+        padding: 1rem 0.75rem;
+        transition: all 0.3s ease;
+
+        &:focus {
+            background-color: var(--bs-body-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.15);
+        }
+    }
+
+    // Error State
+    .is-invalid {
+        border-color: #dc3545 !important;
+    }
+}
+
+// Dark Mode Refinement
+[data-bs-theme="dark"] .bg-body-tertiary {
+    background-color: #1a1a1a !important;
+}

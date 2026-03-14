@@ -1,1 +1,91 @@
-<p>contact works!</p>
+<section class="contact-section py-5">
+    <div class="container mt-5">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h6 class="text-primary fw-bold text-uppercase tracking-widest">Get In Touch</h6>
+            <h2 class="display-5 fw-bold">Let's Build Something <span class="text-primary">Great</span></h2>
+        </div>
+
+        <div class="row g-0 bento-wrapper shadow-lg rounded-5 overflow-hidden border" data-aos="zoom-in">
+
+            <div class="col-lg-5 contact-info p-4 p-md-5 text-white">
+                <h3 class="fw-bold mb-4">Contact Information</h3>
+                <p class="text-white-50 mb-5">Fill out the form and I'll get back to you within 24 hours.</p>
+
+                <div class="d-flex align-items-center mb-4">
+                    <div class="icon-box me-3"><i class="bi bi-envelope"></i></div>
+                    <span>hello&#64;avinash.com</span>
+                </div>
+                <div class="d-flex align-items-center mb-4">
+                    <div class="icon-box me-3"><i class="bi bi-geo-alt"></i></div>
+                    <span>Maharashtra, India</span>
+                </div>
+
+                <div class="mt-auto pt-5">
+                    <h6 class="text-uppercase small fw-bold mb-3 tracking-widest text-white-50">Follow Me</h6>
+                    <div class="social-links d-flex gap-3">
+                        <a href="#" class="social-circle"><i class="bi bi-github"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-circle"><i class="bi bi-twitter-x"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7 bg-body-tertiary p-4 p-md-5">
+                <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" class="needs-validation" novalidate>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name"
+                                    required ngModel #name="ngModel" [class.is-invalid]="name.invalid && name.touched">
+                                <label for="name">Your Name</label>
+                                <div class="invalid-feedback">Please enter your name.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                    required email ngModel #email="ngModel"
+                                    [class.is-invalid]="email.invalid && email.touched">
+                                <label for="email">Email Address</label>
+                                <div class="invalid-feedback">Enter a valid email address.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <textarea class="form-control" id="message" name="message" placeholder="Message"
+                                    style="height: 150px" required ngModel #msg="ngModel"
+                                    [class.is-invalid]="msg.invalid && msg.touched"></textarea>
+                                <label for="message">How can I help you?</label>
+                                <div class="invalid-feedback">Message cannot be empty.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-end">
+                            <button type="submit"
+                                class="btn btn-primary btn-lg rounded-pill px-5 py-3 shadow-sm d-inline-flex align-items-center gap-2"
+                                [disabled]="contactForm.invalid || isSending()">
+                                @if (isSending()) {
+                                <span class="spinner-border spinner-border-sm"></span> Sending...
+                                } @else {
+                                Send Message <i class="bi bi-send-fill"></i>
+                                }
+                            </button>
+                        </div>
+                    </div>
+
+                    @if (isSuccess()) {
+                    <div class="alert alert-success mt-4 rounded-4 border-0 shadow-sm d-flex align-items-center gap-3">
+                        <i class="bi bi-check-circle-fill fs-4"></i>
+                        <span>Your message has been sent successfully!</span>
+                    </div>
+                    }
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
