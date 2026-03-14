@@ -2,10 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as AOS from 'aos';
 import { TestimonialsComponent } from '../../components/testimonials/testimonials.component';
+import { CtaComponent } from '../../components/cta/cta.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, TestimonialsComponent],
+  imports: [CommonModule, TestimonialsComponent, CtaComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

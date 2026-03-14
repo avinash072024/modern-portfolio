@@ -93,7 +93,7 @@ body {
         color: #fff !important; // Ensures text is white on the colored background
         filter: brightness(0.9);
         box-shadow: 0 8px 15px rgba(var(--primary-rgb), 0.3);
-        transform: translateY(-2px);
+        // transform: translateY(-2px);
     }
 
     // Handle the "active/clicked" state logic
