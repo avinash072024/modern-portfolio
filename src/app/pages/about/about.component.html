@@ -1,1 +1,55 @@
-<p>about works!</p>
+<section class="about-page py-5 mt-5">
+    <div class="container mt-5">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h6 class="text-primary fw-bold text-uppercase tracking-widest">Biography</h6>
+            <h2 class="display-5 fw-bold">Who is Avinash?</h2>
+            <div class="header-line mx-auto"></div>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h3 class="fw-bold mb-4">A Story of <span class="text-primary">Passion</span> & Code</h3>
+                <p class="text-secondary lead mb-4">
+                    I am a specialized Frontend Developer based in India, dedicated to building clean,
+                    functional, and user-centered digital experiences.
+                </p>
+                <p class="text-secondary mb-5">
+                    My journey started 4 years ago when I first discovered the power of CSS. Since then,
+                    I’ve evolved into an Angular specialist, focusing on performance optimization and
+                    modern architecture like Signals and Standalone components.
+                </p>
+
+                <div class="education-timeline ps-3 border-start border-primary border-2">
+                    @for (edu of education; track edu.degree) {
+                    <div class="edu-item position-relative mb-4 ps-4">
+                        <div class="dot bg-primary"></div>
+                        <span class="text-primary fw-bold small">{{ edu.year }}</span>
+                        <h5 class="fw-bold mt-1 mb-0">{{ edu.degree }}</h5>
+                        <p class="text-muted small">{{ edu.school }}</p>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-left">
+                <h3 class="fw-bold mb-4 text-center text-lg-start">Technical <span class="text-primary">Stack</span>
+                </h3>
+                <div class="row g-3">
+                    @for (tech of techStack; track tech.name) {
+                    <div class="col-6 col-sm-4">
+                        <div class="tech-card p-3 rounded-4 text-center border bg-body-tertiary">
+                            <i class="bi {{ tech.icon }} fs-2 text-primary mb-2 d-block"></i>
+                            <h6 class="fw-bold mb-1">{{ tech.name }}</h6>
+                            <div class="progress mt-2" style="height: 4px;">
+                                <div class="progress-bar bg-primary" [style.width]="tech.level"></div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

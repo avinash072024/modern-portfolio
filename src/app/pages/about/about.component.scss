@@ -1,0 +1,58 @@
+.about-page {
+    .header-line {
+        width: 60px;
+        height: 4px;
+        background: var(--primary-color);
+        border-radius: 10px;
+        margin-top: 15px;
+    }
+
+    // Education Timeline
+    .education-timeline {
+        .edu-item {
+            .dot {
+                position: absolute;
+                left: -24px; // Aligns with border-start
+                top: 5px;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                border: 3px solid var(--bs-body-bg);
+            }
+        }
+    }
+
+    // Tech Card Interactions
+    .tech-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-color: rgba(var(--primary-rgb), 0.1) !important;
+
+        &:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 15px 30px rgba(var(--primary-rgb), 0.15);
+
+            i {
+                transform: scale(1.2);
+                transition: transform 0.3s ease;
+            }
+        }
+    }
+
+    .progress {
+        background-color: rgba(var(--primary-rgb), 0.1);
+        overflow: visible;
+
+        .progress-bar {
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+    }
+}
+
+// Ensure high contrast for text in dark mode
+[data-bs-theme="dark"] {
+    .text-secondary {
+        color: #b0b0b0 !important;
+    }
+}
