@@ -1,66 +1,71 @@
 .contact-section {
     .bento-wrapper {
-        border-color: rgba(var(--primary-rgb), 0.1) !important;
+        border-color: rgba(var(--bs-emphasis-color-rgb), 0.05) !important;
     }
 
     .contact-info {
-        background: linear-gradient(135deg, var(--primary-color) 0%, color-mix(in srgb, var(--primary-color), black 20%) 100%);
-        display: flex;
-        flex-direction: column;
+        // Uses your active skin color for the background gradient
+        background: linear-gradient(145deg, var(--primary-color) 0%, color-mix(in srgb, var(--primary-color), black 30%) 100%);
 
-        .icon-box {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.15), transparent);
+            z-index: 0;
         }
 
         .social-circle {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 50%;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 12px;
             text-decoration: none;
             transition: all 0.3s ease;
 
             &:hover {
                 background: white;
                 color: var(--primary-color);
-                transform: translateY(-5px);
+                transform: translateY(-5px) rotate(10deg);
             }
         }
     }
 
-    // Modern Floating Labels
-    .form-control {
-        background-color: var(--bs-body-bg);
-        border: 2px solid transparent;
-        border-radius: 15px;
-        padding: 1rem 0.75rem;
-        transition: all 0.3s ease;
-
-        &:focus {
+    // Modern Form Styling
+    .form-floating {
+        .form-control {
             background-color: var(--bs-body-bg);
-            border-color: var(--primary-color);
-            box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.15);
+            border: 1.5px solid var(--bs-border-color);
+            border-radius: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            &:focus {
+                border-color: var(--primary-color);
+                box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.15);
+            }
+        }
+
+        label {
+            padding-left: 1rem;
+            color: var(--bs-secondary-color);
         }
     }
 
-    // Error State
     .is-invalid {
         border-color: #dc3545 !important;
     }
 }
 
 // Dark Mode Refinement
-[data-bs-theme="dark"] .bg-body-tertiary {
-    background-color: #1a1a1a !important;
+[data-bs-theme="dark"] {
+    .bg-body-tertiary {
+        background-color: rgba(255, 255, 255, 0.02) !important;
+    }
 }

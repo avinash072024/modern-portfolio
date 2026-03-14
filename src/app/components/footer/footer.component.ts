@@ -13,4 +13,6 @@ import { TitleCasePipe } from '@angular/common';
 export class FooterComponent {
   currentYear: number = new Date().getFullYear();
   myInformation: AboutMe = Constants.ABOUT_ME;
+  appName1: string = Constants.APP_NAME1;
+  appName2: string = Constants.APP_NAME2;
 }
