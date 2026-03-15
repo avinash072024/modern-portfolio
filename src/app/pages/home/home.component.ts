@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import * as AOS from 'aos';
 import { TestimonialsComponent } from '../../components/testimonials/testimonials.component';
 import { CtaComponent } from '../../components/cta/cta.component';
+import { RouterLink } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, TestimonialsComponent, CtaComponent],
+  imports: [CommonModule, RouterLink, TestimonialsComponent, CtaComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -46,5 +48,16 @@ export class HomeComponent implements OnInit {
     }
 
     setTimeout(() => this.type(), typeSpeed);
+  }
+
+  downloadResume(): void {
+    const link = document.createElement('a');
+    link.setAttribute('target', '_blank');
+    link.setAttribute('href', 'assets/resume/Avinash-Marbhal-Resume-Angular-Updated.pdf'); // Path to your file
+    link.setAttribute('download', 'Avinash-Marbhal-Resume-Angular.pdf'); // Desired filename
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    $('#staticBackdrop').modal('show');
   }
 }
