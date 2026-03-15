@@ -15,11 +15,11 @@
                         <h6 class="dropdown-header px-0 mb-2">Appearance</h6>
                         <div class="d-flex gap-2">
                             <button class="btn btn-sm flex-grow-1 theme-btn"
-                                [class.active]="themeService.theme() === 'light'" (click)="themeService.toggleTheme()">
+                                [class.active]="themeService.theme() === 'light'" (click)="themeService.toggleTheme('light')">
                                 <i class="bi bi-sun"></i> Light
                             </button>
                             <button class="btn btn-sm flex-grow-1 theme-btn"
-                                [class.active]="themeService.theme() === 'dark'" (click)="themeService.toggleTheme()">
+                                [class.active]="themeService.theme() === 'dark'" (click)="themeService.toggleTheme('dark')">
                                 <i class="bi bi-moon-stars"></i> Dark
                             </button>
                         </div>
