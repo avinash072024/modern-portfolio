@@ -20,8 +20,9 @@ export class ThemeService {
     });
   }
 
-  toggleTheme() {
-    this.theme.set(this.theme() === 'light' ? 'dark' : 'light');
+  toggleTheme(theme: string) {
+    // this.theme.set(this.theme() === 'light' ? 'dark' : 'light');
+    this.theme.set(theme);
     this.sessionService.setThemeSession(this.theme());
   }
 
