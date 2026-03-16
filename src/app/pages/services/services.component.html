@@ -1,7 +1,7 @@
-<section class="services-section py-5 mt-5 position-relative overflow-hidden">
+<section class="services-section pt-5 mt-5 position-relative overflow-hidden">
     <div class="glow-bg"></div>
 
-    <div class="container py-5">
+    <div class="container pt-5">
         <div class="text-center mb-5" data-aos="fade-up">
             <span class="badge rounded-pill bg-primary-subtle text-primary px-3 py-2 mb-3">MY SPECIALIZED NICHES</span>
             <h2 class="display-4 fw-bold">Solutions I <span class="text-primary">Provide.</span></h2>
@@ -67,12 +67,19 @@
             </div>
         </div>
 
-        <div class="mt-5 text-center" data-aos="zoom-in">
+        <!-- <div class="mt-5 text-center" data-aos="zoom-in">
             <div class="p-5 glass-card border-primary-20 rounded-5">
                 <h4 class="fw-bold mb-3">Have a unique requirement?</h4>
                 <p class="text-secondary mb-4">I love solving complex problems. Let's discuss your project.</p>
-                <button class="btn btn-primary btn-lg rounded-pill px-5">Start Conversation</button>
+                <button class="btn btn-primary btn-lg rounded-pill px-5" (click)="goToContact()">Start
+                    Conversation</button>
+                <a routerLink="/projects" class="btn btn-primary btn-lg px-4 py-3 shadow-lg rounded-pill">
+                    View Portfolio <i class="bi bi-arrow-right ms-2"></i>
+                </a>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
+
+<app-cta [title]="'Have a unique requirement?'"
+            [subtitle]="`I love solving complex problems. Let's discuss your project.`" [buttonText]="'Start Conversation'" [buttonLink]="'/contact'" />

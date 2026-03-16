@@ -3,6 +3,7 @@ import { ThemeService } from '../../services/theme/theme.service';
 import { Constants } from '../../models/constants';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AboutMe } from '../../interfaces/about-me';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ export class HeaderComponent {
   appName1: string = Constants.APP_NAME1;
   appName2: string = Constants.APP_NAME2;
   currentYear: number = new Date().getFullYear();
+  myInformation: AboutMe = Constants.ABOUT_ME;
 
   skins = [
     { name: 'Default Blue', class: 'default-blue', hex: '#0d6efd' },

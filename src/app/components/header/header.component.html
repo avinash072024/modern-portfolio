@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top transition-all" [class.scrolled]="isScrolled()">
     <div class="container">
         <a class="navbar-brand fw-bold fs-4" routerLink="/">
-            <i class="bi bi-code-slash text-primary"></i> {{appName1}}<span class="text-primary"> {{appName2}}.</span>
+            <i class="bi bi-code-slash text-primary"></i> {{myInformation.firstName | titlecase}}<span class="text-primary"> {{myInformation.lastName | titlecase}}.</span>
         </a>
 
         <div class="d-flex align-items-center gap-3 order-lg-last">
