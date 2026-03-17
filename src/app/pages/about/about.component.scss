@@ -48,6 +48,11 @@
             box-shadow: 0 0 10px var(--primary-color);
         }
     }
+
+    // Modern pill badge override
+    .bg-primary-subtle {
+        background-color: rgba(var(--primary-rgb), 0.1) !important;
+    }
 }
 
 .more-stack {

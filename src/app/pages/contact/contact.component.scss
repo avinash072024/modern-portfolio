@@ -61,6 +61,11 @@
     .is-invalid {
         border-color: #dc3545 !important;
     }
+
+    // Modern pill badge override
+    .bg-primary-subtle {
+        background-color: rgba(var(--primary-rgb), 0.1) !important;
+    }
 }
 
 // Dark Mode Refinement

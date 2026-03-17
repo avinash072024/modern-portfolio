@@ -1,5 +1,6 @@
-<section class="skills-section py-5 mt-5 position-relative overflow-hidden">
-    <div class="bg-glow"></div>
+<section class="skills-section py-5 mt-5">
+    <!-- <div class="bg-glow"></div> -->
+     <div class="glow-bg"></div>
 
     <div class="container py-5">
         <div class="text-center mb-5" data-aos="fade-up">
@@ -34,7 +35,7 @@
                                 <span>{{skill.level}}%</span>
                             </div>
                             <div class="progress-track">
-                                <div class="progress-fill" [style.width.%]="skill.level"></div>
+                                <div class="progress-fill" [style.width.%]="skill.level" [style.background]="skill.color"></div>
                             </div>
                         </div>
                     </div>

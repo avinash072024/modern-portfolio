@@ -1,18 +1,19 @@
 .services-section {
     background-color: var(--bs-body-bg);
     min-height: 100vh;
+    position: initial;
 
-    .glow-bg {
-        position: absolute;
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(var(--primary-rgb), 0.15) 0%, transparent 70%);
-        pointer-events: none;
-        z-index: 0;
-    }
+    // .glow-bg {
+    //     position: absolute;
+    //     top: 20%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     width: 600px;
+    //     height: 600px;
+    //     background: radial-gradient(circle, rgba(var(--primary-rgb), 0.15) 0%, transparent 70%);
+    //     pointer-events: none;
+    //     z-index: 0;
+    // }
 
     .glass-card {
         background: rgba(var(--bs-body-bg-rgb), 0.6);
@@ -75,5 +76,11 @@
     .glass-card {
         background: rgba(20, 20, 20, 0.4);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .services-section {
+        position: relative;
     }
 }

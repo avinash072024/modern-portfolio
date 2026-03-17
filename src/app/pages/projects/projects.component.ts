@@ -1,11 +1,37 @@
 import { Component } from '@angular/core';
+import { Project } from '../../interfaces/projects';
+import { Constants } from '../../models/constants';
+import { CtaComponent } from '../../components/cta/cta.component';
+import { CommonModule } from '@angular/common';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-projects',
-  imports: [],
+  imports: [CtaComponent, CommonModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
 export class ProjectsComponent {
+  selectedProject: any = null;
 
+  projects: Project[] = Constants.PROJECTS;
+
+  openProjectModal(project: any) {
+    this.selectedProject = project;
+    const modalElement = document.getElementById('projectModal');
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
+  }
+
+  // Add this method to your ProjectsComponent class
+  getDescText(descObj: any): string {
+    // Extracts the first value found in the object (e.g., line1, line2)
+    return Object.values(descObj)[0] as string;
+  }
+
+  getLineText(descItem: any): string {
+    if (!descItem) return '';
+    const values = Object.values(descItem);
+    return values.length > 0 ? String(values[0]) : '';
+  }
 }
