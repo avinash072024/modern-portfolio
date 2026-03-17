@@ -15,6 +15,8 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   title = 'modern-portfolio';
+  isBrowser: boolean = false;
+  showScrollTop: boolean = false;
 
   constructor(
     private router: Router,
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   ngOnInit() {
@@ -34,6 +37,18 @@ export class AppComponent implements OnInit {
       // once: true,
       mirror: false
     });
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (!this.isBrowser) return;
+    const y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.showScrollTop = y > 300;
+  }
+
+  scrollToTop() {
+    if (!this.isBrowser) return;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   @HostListener('document:keydown', ['$event'])

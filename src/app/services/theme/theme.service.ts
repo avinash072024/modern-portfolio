@@ -17,6 +17,17 @@ export class ThemeService {
       document.documentElement.setAttribute('data-skin', this.skin());
       localStorage.setItem(Constants.THEME_KEY, this.theme());
       localStorage.setItem(Constants.SKIN_KEY, this.skin());
+      // Update meta theme-color to match the current skin's primary color
+      try {
+        const style = getComputedStyle(document.documentElement);
+        const primary = style.getPropertyValue('--bs-primary')?.trim() || '';
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta && primary) {
+          meta.setAttribute('content', primary);
+        }
+      } catch (e) {
+        // ignore on server or if not available
+      }
     });
   }
 
