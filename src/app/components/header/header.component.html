@@ -68,10 +68,10 @@
     </div>
 </nav>
 
-<div class="offcanvas offcanvas-end rounded-start-5 border-0" tabindex="-1" id="mobileMenu" data-bs-backdrop="static">
+<div class="offcanvas offcanvas-end border-0" tabindex="-1" id="mobileMenu" data-bs-backdrop="static">
     <div class="offcanvas-header py-4 px-4 d-flex justify-content-between align-items-center">
         <h5 class="offcanvas-title fw-bold">
-            <i class="bi bi-code-slash text-primary"></i> {{appName1}}<span class="text-primary">{{appName2}}</span>
+            <i class="bi bi-code-slash text-primary"></i> {{myInformation.firstName | titlecase}} <span class="text-primary"> {{myInformation.lastName | titlecase}}</span>
         </h5>
         <button type="button" class="btn-close-custom" data-bs-dismiss="offcanvas">
             <i class="bi bi-x-lg"></i>
@@ -101,7 +101,7 @@
             <!-- <button class="btn btn-danger w-100 py-3 rounded-pill fw-bold shadow-sm mb-3">
                 Login / Register
             </button> -->
-            <p class="mb-0 text-center small text-muted"><i class="bi bi-c-circle"></i> {{currentYear}} {{appName1}} {{appName2}}.</p>
+            <p class="mb-0 text-center small text-muted"><i class="bi bi-c-circle"></i> {{currentYear}} <span class="fw-bold mb-0">{{myInformation.firstName | titlecase}} {{myInformation.lastName | titlecase}}</span>.</p>
         </div>
     </div>
 </div>
