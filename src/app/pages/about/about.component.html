@@ -53,9 +53,9 @@
             </div>
 
             <div class="col-lg-5" data-aos="fade-left">
-                <h3 class="fw-bold mb-4 text-center text-lg-start">Technical <span class="text-primary">Stack</span>
+                <h3 class="fw-bold mb-0 text-center text-lg-start">Technical <span class="text-primary">Stack</span>
                 </h3>
-                <div class="row g-3">
+                <div class="row g-3 my-4">
                     @for (tech of techStack; track tech.name) {
                     <div class="col-6 col-sm-4">
                         <div class="tech-card p-3 rounded-4 text-center border bg-body-tertiary">
@@ -67,6 +67,12 @@
                         </div>
                     </div>
                     }
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center text-md-end ">
+                        <a routerLink="/skills" class="more-stack text-decoration-none text-primary">More Stack <i
+                                class="bi bi-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CtaComponent } from "../../components/cta/cta.component";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-about',
-  imports: [CtaComponent],
+  imports: [CtaComponent, RouterLink],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
