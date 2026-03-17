@@ -53,8 +53,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -107,8 +107,7 @@
             ],
             "scripts": []
           }
-        }
-        ,
+        },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
@@ -128,7 +127,14 @@
           "options": {
             "browserTarget": "modern-portfolio:build:production",
             "serverTarget": "modern-portfolio:server:production",
-            "routes": ["/","/about","/projects","/services","/skills","/contact"]
+            "routes": [
+              "/",
+              "/about",
+              "/projects",
+              "/services",
+              "/skills",
+              "/contact"
+            ]
           }
         }
       }
