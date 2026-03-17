@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:ssr": "ng run modern-portfolio:server:production",
+    "prerender": "ng run modern-portfolio:prerender",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:modern-portfolio": "node dist/modern-portfolio/server/server.mjs"

@@ -108,6 +108,29 @@
             "scripts": []
           }
         }
+        ,
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/modern-portfolio/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "none"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "browserTarget": "modern-portfolio:build:production",
+            "serverTarget": "modern-portfolio:server:production",
+            "routes": ["/","/about","/projects","/services","/skills","/contact"]
+          }
+        }
       }
     }
   },
