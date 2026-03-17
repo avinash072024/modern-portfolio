@@ -286,8 +286,27 @@
 }
 
 .text-truncate-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;   /* Number of lines */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* Number of lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.modal-body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--primary-color);
+        border-radius: 20px;
+    }
 }

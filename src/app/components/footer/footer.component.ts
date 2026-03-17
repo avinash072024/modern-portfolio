@@ -15,4 +15,6 @@ export class FooterComponent {
   myInformation: AboutMe = Constants.ABOUT_ME;
   appName1: string = Constants.APP_NAME1;
   appName2: string = Constants.APP_NAME2;
+
+  visitorCount: number = 0;
 }
