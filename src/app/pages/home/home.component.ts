@@ -4,6 +4,8 @@ import * as AOS from 'aos';
 import { TestimonialsComponent } from '../../components/testimonials/testimonials.component';
 import { CtaComponent } from '../../components/cta/cta.component';
 import { RouterLink } from '@angular/router';
+import { AboutMe } from '../../interfaces/about-me';
+import { Constants } from '../../models/constants';
 declare var $: any;
 
 @Component({
@@ -19,6 +21,7 @@ export class HomeComponent implements OnInit {
   private roleIndex = 0;
   private charIndex = 0;
   private isDeleting = false;
+  myInformation: AboutMe = Constants.ABOUT_ME;
 
   ngOnInit() {
     // AOS.init({ duration: 1000, once: true });

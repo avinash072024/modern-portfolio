@@ -17,32 +17,32 @@ export const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent,
-        title: `${Constants.APP_NAME} | Home`
+        title: `${Constants.APP_NAME} — Home`
     },
     {
         path: 'about',
         component: AboutComponent,
-        title: `${Constants.APP_NAME} | About`
+        title: `${Constants.APP_NAME} — About`
     },
     {
         path: 'contact',
         component: ContactComponent,
-        title: `${Constants.APP_NAME} | Contact`
+        title: `${Constants.APP_NAME} — Contact`
     },
     {
         path: 'services',
         component: ServicesComponent,
-        title: `${Constants.APP_NAME} | Services`
+        title: `${Constants.APP_NAME} — Services`
     },
     {
         path: 'skills',
         component: SkillsComponent,
-        title: `${Constants.APP_NAME} | Skills`
+        title: `${Constants.APP_NAME} — Skills`
     },
     {
         path: 'projects',
         component: ProjectsComponent,
-        title: `${Constants.APP_NAME} | Projects`
+        title: `${Constants.APP_NAME} — Projects`
     },
     {
         path: '**',

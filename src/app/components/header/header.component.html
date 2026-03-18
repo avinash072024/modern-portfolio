@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top transition-all" [class.scrolled]="isScrolled()">
     <div class="container">
-        <a class="navbar-brand fw-bold fs-4" routerLink="/">
+        <a class="navbar-brand fw-bold fs-3" routerLink="/">
             <i class="bi bi-code-slash text-primary"></i> {{myInformation.firstName | titlecase}}<span class="text-primary"> {{myInformation.lastName | titlecase}}.</span>
         </a>
 
@@ -89,18 +89,7 @@
             }
         </ul>
 
-        <!-- <div class="mt-auto pt-5 border-top">
-            <p class="small text-secondary mb-3">Let's build something together.</p>
-            <div class="d-flex gap-3">
-                <a href="#" class="social-icon"><i class="bi bi-github"></i></a>
-                <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-            </div>
-        </div> -->
-
         <div class="mt-auto pt-3 px-4 border-top">
-            <!-- <button class="btn btn-danger w-100 py-3 rounded-pill fw-bold shadow-sm mb-3">
-                Login / Register
-            </button> -->
             <p class="mb-0 text-center small text-muted"><i class="bi bi-c-circle"></i> {{currentYear}} <span class="fw-bold mb-0">{{myInformation.firstName | titlecase}} {{myInformation.lastName | titlecase}}</span>.</p>
         </div>
     </div>
