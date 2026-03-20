@@ -20,4 +20,12 @@ describe('TestimonialsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should load testimonials from data and render first item', () => {
+    fixture.detectChanges();
+    expect(component.testimonials.length).toBeGreaterThan(0);
+    const el: HTMLElement = fixture.nativeElement;
+    const firstName = el.querySelector('.testimonial-slide h6')?.textContent || '';
+    expect(firstName).toContain(component.testimonials[0].name);
+  });
 });
