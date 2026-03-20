@@ -61,6 +61,13 @@ export class HomeComponent implements OnInit {
     document.body.appendChild(link);
     link.click();
     link.remove();
-    $('#staticBackdrop').modal('show');
+    const modalEl = document.getElementById('staticBackdrop');
+    // Use Bootstrap's JS modal if available, otherwise fallback to jQuery if present
+    if ((window as any).bootstrap && modalEl) {
+      const bsModal = new (window as any).bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+      bsModal.show();
+    } else if (typeof $ !== 'undefined' && $('#staticBackdrop').modal) {
+      $('#staticBackdrop').modal('show');
+    }
   }
 }

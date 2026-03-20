@@ -143,3 +143,38 @@
 .tracking-widest {
     letter-spacing: 0.2rem;
 }
+
+/* Custom modal styling — modern, responsive and theme-aware */
+.custom-modal .modal-content {
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--bs-body-bg) 0%, color-mix(in srgb, var(--bs-body-bg), black 3%) 100%);
+}
+
+.custom-modal .modal-header {
+    background: linear-gradient(90deg, var(--primary-color), color-mix(in srgb, var(--primary-color), white 20%));
+    color: #fff;
+    align-items: center;
+}
+
+.custom-modal .icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: rgba(var(--primary-rgb), 1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.custom-modal .modal-body {
+    background: var(--bs-body-bg);
+}
+
+.custom-modal .btn-close-white {
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+}
+
+@media (max-width: 576px) {
+    .custom-modal .modal-content { margin: 0 1rem; }
+    .custom-modal .icon-wrap { width: 48px; height: 48px; }
+}

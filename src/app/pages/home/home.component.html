@@ -50,10 +50,6 @@
     </div>
 </section>
 
-
-
-
-
 <section class="py-5">
     <div class="container">
         <div class="row g-4 align-items-center">
@@ -103,3 +99,31 @@
 <app-testimonials />
 
 <app-cta [title]="'Ready to start a project?'" [subtitle]="`I'm currently available for freelance work.`" [buttonLink]="'/contact'" [buttonText]="`Let's Chat`" />
+
+<!-- Resume Download Modal (static backdrop, manual close) -->
+<div class="modal fade custom-modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0">
+            <div class="modal-header border-0 p-4 pb-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="icon-wrap d-flex align-items-center justify-content-center">
+                        <i class="bi bi-file-earmark-arrow-down-fill fs-3 text-white"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title mb-0" id="staticBackdropLabel">Resume downloaded</h5>
+                        <small class="text-opacity-75 rounded-pill">Your CV has been saved to your device.</small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-4 pt-2">
+                <p class="mb-3 text-secondary">Thanks for downloading my resume. If the download didn't start, <a href="assets/resume/Avinash-Marbhal-Resume-Angular-Updated.pdf" target="_blank" rel="noopener">click here</a>.</p>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill me-2" data-bs-dismiss="modal">Close</button>
+                    <a href="assets/resume/Avinash-Marbhal-Resume-Angular-Updated.pdf" target="_blank" class="btn btn-primary rounded-pill">Open file</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
