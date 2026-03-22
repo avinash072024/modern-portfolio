@@ -25,47 +25,47 @@ export class Constants {
         {
             title: 'Frontend Development',
             skills: [
-                { name: 'HTML5', icon: 'fa-brands fa-html5', level: 98, color: '#e34f26' },
-                { name: 'CSS3, SCSS, SASS', icon: 'fa-brands fa-css3-alt', level: 98, color: '#264de4' },
-                { name: 'JavaScript', icon: 'fa-brands fa-js', level: 90, color: '#f7df1e' },
-                { name: 'Angular 14+', icon: 'fa-brands fa-angular', level: 90, color: '#dd0031' },
-                { name: 'TypeScript', icon: 'bi bi-typescript', level: 85, color: '#3178c6' },
-                { name: 'Bootstrap, Tailwind CSS', icon: 'bi bi-bootstrap-fill', level: 95, color: '#7952b3' },
-                { name: 'React, Next.js', icon: 'fa-brands fa-react', level: 70, color: '#61dafb' },
-                { name: 'jQuery', icon: 'fa-brands fa-js', level: 80, color: '#0769ad' }
+                { name: 'HTML5', icon: 'fa-brands fa-html5', level: 98, color: '#e34f26', category: 'Frontend Development' },
+                { name: 'CSS3, SCSS, SASS', icon: 'fa-brands fa-css3-alt', level: 98, color: '#264de4', category: 'Frontend Development' },
+                { name: 'JavaScript', icon: 'fa-brands fa-js', level: 90, color: '#f7df1e', category: 'Frontend Development' },
+                { name: 'Angular 14+', icon: 'fa-brands fa-angular', level: 90, color: '#dd0031', category: 'Frontend Development' },
+                { name: 'TypeScript', icon: 'bi bi-typescript', level: 85, color: '#3178c6', category: 'Frontend Development' },
+                { name: 'Bootstrap, Tailwind CSS', icon: 'bi bi-bootstrap-fill', level: 95, color: '#7952b3', category: 'Frontend Development' },
+                { name: 'React, Next.js', icon: 'fa-brands fa-react', level: 70, color: '#61dafb', category: 'Frontend Development' },
+                { name: 'jQuery', icon: 'fa-brands fa-js', level: 80, color: '#0769ad', category: 'Frontend Development' }
             ]
         },
         {
             title: 'Backend & Database',
             skills: [
-                { name: 'Node.js', icon: 'ti ti-brand-nodejs', level: 80, color: '#339933' },
-                { name: 'SQL Server', icon: 'bi-database-fill', level: 75, color: '#4479a1' },
-                { name: 'MongoDB', icon: 'bi bi-leaf-fill', level: 85, color: '#47a248' }, // Added MongoDB
-                { name: 'Firebase', icon: 'ti ti-brand-firebase', level: 70, color: '#ffca28' }
+                { name: 'Node.js', icon: 'ti ti-brand-nodejs', level: 80, color: '#339933', category: 'Backend & Database' },
+                { name: 'SQL Server', icon: 'bi-database-fill', level: 75, color: '#4479a1', category: 'Backend & Database' },
+                { name: 'MongoDB', icon: 'bi bi-leaf-fill', level: 85, color: '#47a248', category: 'Backend & Database' }, // Added MongoDB
+                { name: 'Firebase', icon: 'ti ti-brand-firebase', level: 70, color: '#ffca28', category: 'Backend & Database' }
             ]
         },
         {
             title: 'Tools & Design',
             skills: [
-                { name: 'VS Code', icon: 'bi bi-code-slash', level: 95, color: '#007acc' },
-                { name: 'Figma', icon: 'ti ti-brand-figma', level: 85, color: '#f24e1e' },
-                { name: 'Postman', icon: 'bi bi-send-fill', level: 90, color: '#ff6c37' }
+                { name: 'VS Code', icon: 'bi bi-code-slash', level: 95, color: '#007acc', category: 'Tools & Design' },
+                { name: 'Figma', icon: 'ti ti-brand-figma', level: 85, color: '#f24e1e', category: 'Tools & Design' },
+                { name: 'Postman', icon: 'bi bi-send-fill', level: 90, color: '#ff6c37', category: 'Tools & Design' }
             ]
         },
         {
             title: 'Version Control & DevOps',
             skills: [
-                { name: 'Git', icon: 'fa-brands fa-git-alt', level: 92, color: '#f05032' },
-                { name: 'GitHub', icon: 'fa-brands fa-github', level: 95, color: '#181717' },
-                { name: 'GitLab', icon: 'fa-brands fa-gitlab', level: 80, color: '#fc6d26' }
+                { name: 'Git', icon: 'fa-brands fa-git-alt', level: 92, color: '#f05032', category: 'Version Control & DevOps' },
+                { name: 'GitHub', icon: 'fa-brands fa-github', level: 95, color: '#181717', category: 'Version Control & DevOps' },
+                { name: 'GitLab', icon: 'fa-brands fa-gitlab', level: 80, color: '#fc6d26', category: 'Version Control & DevOps' }
             ]
         },
         {
             title: 'Payment Gateways',
             skills: [
-                { name: 'Stripe', icon: 'bi bi-stripe', level: 90, color: '#635bff' },
-                { name: 'Razorpay', icon: 'bi bi-credit-card-2-front-fill', level: 85, color: '#0d94fb' },
-                { name: 'BillDesk', icon: 'bi bi-wallet2', level: 75, color: '#f58220' }
+                { name: 'Stripe', icon: 'bi bi-stripe', level: 90, color: '#635bff', category: 'Payment Gateways' },
+                { name: 'Razorpay', icon: 'bi bi-credit-card-2-front-fill', level: 85, color: '#0d94fb', category: 'Payment Gateways' },
+                { name: 'BillDesk', icon: 'bi bi-wallet2', level: 75, color: '#f58220', category: 'Payment Gateways' }
             ]
         }
     ];

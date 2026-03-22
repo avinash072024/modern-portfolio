@@ -72,10 +72,13 @@
     /* Transition from Skin Color to a Fixed Blue 
        Matches the Orange-to-Blue vibe in your screenshot 
     */
-    background: linear-gradient(90deg,
-            var(--primary-color) 0%,
-            #3b5998 60%,
-            #1e3c72 100%);
+    // background: linear-gradient(90deg,
+    //         var(--primary-color) 0%,
+    //         #3b5998 60%,
+    //         #1e3c72 100%);
+
+
+    background: linear-gradient(120deg, var(--primary-color) 0%, #3b5998 75%, #1e3c72 75%);
 
     .cta-content {
         z-index: 2;
