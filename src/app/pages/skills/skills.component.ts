@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SkillCategory } from '../../interfaces/skills';
 import { Constants } from '../../models/constants';
+import { SkillsService } from '../../services/skills/skills.service';
 
 @Component({
   selector: 'app-skills',
@@ -8,55 +9,55 @@ import { Constants } from '../../models/constants';
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.scss'
 })
-export class SkillsComponent {
-  // categories = [
-  //   {
-  //     title: 'Frontend Development',
-  //     skills: [
-  //       { name: 'HTML5', icon: 'fa-brands fa-html5', level: 98, color: '#e34f26' },
-  //       { name: 'CSS3, SCSS, SASS', icon: 'fa-brands fa-css3-alt', level: 98, color: '#264de4' },
-  //       { name: 'JavaScript', icon: 'fa-brands fa-js', level: 90, color: '#f7df1e' },
-  //       { name: 'Angular 14+', icon: 'fa-brands fa-angular', level: 90, color: '#dd0031' },
-  //       { name: 'React, Next.js', icon: 'fa-brands fa-react', level: 70, color: '#61dafb' },
-  //       { name: 'TypeScript', icon: 'bi bi-typescript', level: 85, color: '#3178c6' },
-  //       { name: 'Bootstrap, Tailwind CSS', icon: 'bi bi-bootstrap-fill', level: 95, color: '#7952b3' },
-  //       { name: 'jQuery', icon: 'fa-brands fa-js', level: 80, color: '#0769ad' }
-  //     ]
-  //   },
-  //   {
-  //     title: 'Backend & Database',
-  //     skills: [
-  //       { name: 'Node.js', icon: 'ti ti-brand-nodejs', level: 80, color: '#339933' },
-  //       { name: 'SQL Server', icon: 'bi-database-fill', level: 75, color: '#4479a1' },
-  //       { name: 'MongoDB', icon: 'bi bi-leaf-fill', level: 85, color: '#47a248' }, // Added MongoDB
-  //       { name: 'Firebase', icon: 'ti ti-brand-firebase', level: 70, color: '#ffca28' }
-  //     ]
-  //   },
-  //   {
-  //     title: 'Tools & Design',
-  //     skills: [
-  //       { name: 'VS Code', icon: 'bi bi-code-slash', level: 95, color: '#007acc' },
-  //       { name: 'Figma', icon: 'ti ti-brand-figma', level: 85, color: '#f24e1e' },
-  //       { name: 'Postman', icon: 'bi bi-send-fill', level: 90, color: '#ff6c37' }
-  //     ]
-  //   },
-  //   {
-  //     title: 'Version Control & DevOps',
-  //     skills: [
-  //       { name: 'Git', icon: 'fa-brands fa-git-alt', level: 92, color: '#f05032' },
-  //       { name: 'GitHub', icon: 'fa-brands fa-github', level: 95, color: '#181717' },
-  //       { name: 'GitLab', icon: 'fa-brands fa-gitlab', level: 80, color: '#fc6d26' }
-  //     ]
-  //   },
-  //   {
-  //     title: 'Payment Gateways',
-  //     skills: [
-  //       { name: 'Stripe', icon: 'bi bi-stripe', level: 90, color: '#635bff' },
-  //       { name: 'Razorpay', icon: 'bi bi-credit-card-2-front-fill', level: 85, color: '#0d94fb' },
-  //       { name: 'BillDesk', icon: 'bi bi-wallet2', level: 75, color: '#f58220' }
-  //     ]
-  //   }
-  // ];
+export class SkillsComponent implements OnInit {
+  categories: any[] = [];
+  skillsService = inject(SkillsService);
 
-  categories: any = Constants.TECH_STACK;
+  ngOnInit(): void {
+    // this.categories = Constants.TECH_STACK;
+    this.getSkills();
+  }
+
+  getSkills(): void {
+    this.skillsService.getSkills().subscribe({
+      next: (res: any) => {
+        if(res?.success){
+          debugger;
+          // Group skills by category based on Constants.TECH_STACK order
+          const categoryOrder = [
+            'Frontend Development',
+            'Backend & Database',
+            'Tools & Design',
+            'Version Control & DevOps',
+            'Payment Gateways'
+          ];
+          
+          const groupedSkills = res.skills.reduce((acc: any[], skill: any) => {
+            const index = acc.findIndex((c: any) => c.title === skill.category);
+            if (index > -1) {
+              acc[index].skills.push(skill);
+            } else {
+              acc.push({ title: skill.category, skills: [skill] });
+            }
+            return acc;
+          }, []);
+
+          // Sort categories by predefined order
+          groupedSkills.sort((a: any, b: any) => {
+            const indexA = categoryOrder.indexOf(a.title);
+            const indexB = categoryOrder.indexOf(b.title);
+            return (indexA === -1 ? 99 : indexA) - (indexB === -1 ? 99 : indexB);
+          });
+
+          this.categories = groupedSkills;
+        } else {
+          alert(res?.message);
+        }
+      },
+      error: (err: any) => {
+        alert(err?.message);
+      }
+    });
+  }
+  
 }
