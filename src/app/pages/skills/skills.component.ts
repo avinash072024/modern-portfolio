@@ -22,7 +22,6 @@ export class SkillsComponent implements OnInit {
     this.skillsService.getSkills().subscribe({
       next: (res: any) => {
         if(res?.success){
-          debugger;
           // Group skills by category based on Constants.TECH_STACK order
           const categoryOrder = [
             'Frontend Development',
