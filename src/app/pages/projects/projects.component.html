@@ -60,7 +60,7 @@
 
                     <h3 class="card-title">{{project.title}}</h3>
                     <p class="card-description text-truncate-3">
-                        {{ getLineText(project.desc[0]) }}
+                        {{ getLineText(project.desc) }}
                     </p>
 
                     <div class="d-flex justify-content-between align-items-center">
@@ -144,7 +144,8 @@
                         <div class="check-icon">
                             <i class="bi bi-patch-check-fill text-primary"></i>
                         </div>
-                        <p class="mb-0 text-secondary">{{ getDescText(descLine) }}</p>
+                        <!-- <p class="mb-0 text-secondary">{{ getDescText(descLine) }}</p> -->
+                        <p class="mb-0 text-secondary">{{ descLine }}</p>
                     </div>
                     }
                 </div>

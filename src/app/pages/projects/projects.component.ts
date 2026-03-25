@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Project } from '../../interfaces/projects';
 import { Constants } from '../../models/constants';
 import { CtaComponent } from '../../components/cta/cta.component';
 import { CommonModule } from '@angular/common';
+import { ProjectsService } from '../../services/projects/projects.service';
 declare var bootstrap: any;
 
 @Component({
@@ -11,10 +12,33 @@ declare var bootstrap: any;
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit {
+
   selectedProject: any = null;
 
-  projects: Project[] = Constants.PROJECTS;
+  // projects: Project[] = Constants.PROJECTS;
+  projects: Project[] = [];
+
+  projectService = inject(ProjectsService);
+
+  ngOnInit(): void {
+    this.getProjects();
+  }
+
+  getProjects(): void {
+    this.projectService.getProjects().subscribe({
+      next: (res: any) => {
+        if(res?.success) {
+          this.projects = res?.projects;
+        } else {
+          alert(res?.message);
+        }
+      },
+      error: (err: any) => {
+        alert(err?.message)
+      }
+    })
+  }
 
   openProjectModal(project: any) {
     this.selectedProject = project;
