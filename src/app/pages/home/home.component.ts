@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as AOS from 'aos';
 import { TestimonialsComponent } from '../../components/testimonials/testimonials.component';
@@ -6,6 +6,7 @@ import { CtaComponent } from '../../components/cta/cta.component';
 import { RouterLink } from '@angular/router';
 import { AboutMe } from '../../interfaces/about-me';
 import { Constants } from '../../models/constants';
+import { ContactService } from '../../services/contact/contact.service';
 declare var $: any;
 
 @Component({
@@ -21,11 +22,14 @@ export class HomeComponent implements OnInit {
   private roleIndex = 0;
   private charIndex = 0;
   private isDeleting = false;
-  myInformation: AboutMe = Constants.ABOUT_ME;
+  // myInformation: AboutMe = Constants.ABOUT_ME;
+  myInformation: any;
+  contactService = inject(ContactService);
 
   ngOnInit() {
     // AOS.init({ duration: 1000, once: true });
     this.type();
+    this.getContactDetails();
   }
 
   type() {
@@ -69,5 +73,18 @@ export class HomeComponent implements OnInit {
     } else if (typeof $ !== 'undefined' && $('#staticBackdrop').modal) {
       $('#staticBackdrop').modal('show');
     }
+  }
+
+  getContactDetails(): void {
+    this.contactService.getContact().subscribe({
+      next: (res: any) => {
+        if (res?.success && res?.contact) {
+          this.myInformation = res.contact;
+        }
+      },
+      error: (err: any) => {
+        alert(err.error.message || 'Failed to load contact details');
+      }
+    });
   }
 }

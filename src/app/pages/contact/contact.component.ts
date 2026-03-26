@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AboutMe } from '../../interfaces/about-me';
 import { Constants } from '../../models/constants';
+import { ContactService } from '../../services/contact/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,10 +11,17 @@ import { Constants } from '../../models/constants';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
+
   isSending = signal(false);
   isSuccess = signal(false);
-  myInformation: AboutMe = Constants.ABOUT_ME;
+  // myInformation: AboutMe = Constants.ABOUT_ME;
+  myInformation: any;
+  contactService = inject(ContactService);
+
+  ngOnInit(): void {
+    this.getContactDetails();
+  }
 
   onSubmit(form: NgForm) {
     if (form.valid) {
@@ -29,5 +37,18 @@ export class ContactComponent {
         setTimeout(() => this.isSuccess.set(false), 5000);
       }, 2000);
     }
+  }
+
+  getContactDetails(): void {
+    this.contactService.getContact().subscribe({
+      next: (res: any) => {
+        if (res?.success && res?.contact) {
+          this.myInformation = res.contact;
+        }
+      },
+      error: (err: any) => {
+        alert(err.error.message || 'Failed to load contact details');
+      }
+    });
   }
 }

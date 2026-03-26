@@ -26,8 +26,8 @@
                         <div class="icon-box me-3 fs-4 text-white"><i class="bi bi-envelope-at-fill"></i></div>
                         <div>
                             <small class="d-block text-white-50">Email Me</small>
-                            <a [href]="`mailto:${myInformation.email}`"
-                                class="text-white fw-medium text-decoration-none">{{myInformation.email}}</a>
+                            <a [href]="`mailto:${myInformation?.email}`"
+                                class="text-white fw-medium text-decoration-none">{{myInformation?.email || '-'}}</a>
                         </div>
                     </div>
 
@@ -36,8 +36,8 @@
                         <div class="icon-box me-3 fs-4 text-white"><i class="bi bi-telephone-fill"></i></div>
                         <div>
                             <small class="d-block text-white-50">Contact Me</small>
-                            <a [href]="`tel:${myInformation.contact}`"
-                                class="text-white fw-medium text-decoration-none">{{myInformation.contact}}</a>
+                            <a [href]="`tel:${myInformation?.phone}`"
+                                class="text-white fw-medium text-decoration-none">{{myInformation?.phone || '-'}}</a>
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                         <div class="icon-box me-3 fs-4 text-white"><i class="bi bi-geo-alt-fill"></i></div>
                         <div>
                             <small class="d-block text-white-50">Location</small>
-                            <span class="fw-medium">{{myInformation.location}}</span>
+                            <span class="fw-medium">{{myInformation?.address || '-'}}</span>
                         </div>
                     </div>
 
