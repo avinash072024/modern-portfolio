@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, inject, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import * as AOS from 'aos';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -6,6 +6,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ThemeService } from './services/theme/theme.service';
 import { isPlatformBrowser } from '@angular/common';
+import { VisitorService } from './services/visitor/visitor.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,8 @@ export class AppComponent implements OnInit {
   title = 'modern-portfolio';
   isBrowser: boolean = false;
   showScrollTop: boolean = false;
+  visitorService = inject(VisitorService);
+  ipDetails: any;
 
   constructor(
     private router: Router,
@@ -37,7 +40,40 @@ export class AppComponent implements OnInit {
       // once: true,
       mirror: false
     });
+    debugger;
+    this.addNewVisitor();
   }
+
+  addNewVisitor(): void {
+    debugger;
+    this.visitorService.getIPDetails().subscribe({
+      next: (res: any) => {
+        this.ipDetails = res;
+        console.log(this.ipDetails);
+        if (this.ipDetails) {
+          debugger;
+          this.visitorService.addVisitor(this.ipDetails).subscribe({
+            next: (res) => {
+              console.log(res);
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+
+
+  }
+
+  // @HostListener('document:contextmenu', ['$event'])
+  // onRightClick(event: MouseEvent) {
+  //   event.preventDefault();
+  // }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
