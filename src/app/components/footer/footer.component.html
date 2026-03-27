@@ -4,7 +4,7 @@
 
             <div class="col-lg-4 col-md-6" data-aos="fade-up">
                 <a class="footer-brand fw-bold mb-3 d-inline-block" routerLink="/">
-                    {{myInformation?.firstName}}<span class="text-primary"> {{myInformation?.lastName}}.</span>
+                    {{myInformation?.firstName || 'Avinash' | titlecase}}<span class="text-primary"> {{myInformation?.lastName || 'Marbhal' | titlecase}}.</span>
                 </a>
                 <p class="text-secondary mb-4 pe-lg-5">
                     Specializing in building high-performance, modern web applications.
@@ -67,8 +67,8 @@
             class="footer-bottom mt-5 py-4 border-top border-opacity-10 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
             <p class="mb-0 text-secondary small">
                 <i class="bi bi-c-circle"></i> {{currentYear}} <span
-                    class="fw-bold text-emphasis">{{myInformation?.firstName | titlecase}} {{myInformation?.lastName |
-                    titlecase}}</span>.
+                    class="fw-bold text-emphasis">{{(myInformation?.firstName || 'Avinash') | titlecase}} {{myInformation?.lastName ||
+                    'Marbhal' | titlecase}}</span>.
             </p>
             <p class="mb-0 text-secondary small">
                 Made with <i class="bi bi-heart-fill text-primary mx-1"></i> and Angular. | Visitors: {{visitorCount}}
