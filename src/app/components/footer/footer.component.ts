@@ -42,7 +42,6 @@ export class FooterComponent implements OnInit {
   }
 
   getVisitor(): void {
-    debugger;
     this.visitorService.getVisitor().subscribe({
       next: (res: any) => {
         if (res?.success && res?.data) {

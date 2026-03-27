@@ -20,7 +20,6 @@ export class VisitorService {
   }
 
   getVisitor(): Observable<any> {
-    debugger;
     return this.http.get(environment.apiUrl + '/visitor/all');
   }
 }
