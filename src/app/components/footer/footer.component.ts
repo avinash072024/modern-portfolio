@@ -4,6 +4,7 @@ import { Constants } from '../../models/constants';
 import { AboutMe } from '../../interfaces/about-me';
 import { TitleCasePipe } from '@angular/common';
 import { ContactService } from '../../services/contact/contact.service';
+import { VisitorService } from '../../services/visitor/visitor.service';
 
 @Component({
   selector: 'app-footer',
@@ -18,11 +19,13 @@ export class FooterComponent implements OnInit {
   appName1: string = Constants.APP_NAME1;
   appName2: string = Constants.APP_NAME2;
   contactService = inject(ContactService);
+  visitorService = inject(VisitorService);
 
   visitorCount: number = 0;
 
   ngOnInit(): void {
     this.getContactDetails();
+    this.getVisitor();
   }
 
   getContactDetails(): void {
@@ -34,6 +37,20 @@ export class FooterComponent implements OnInit {
       },
       error: (err: any) => {
         alert(err.error.message || 'Failed to load contact details');
+      }
+    });
+  }
+
+  getVisitor(): void {
+    debugger;
+    this.visitorService.getVisitor().subscribe({
+      next: (res: any) => {
+        if (res?.success && res?.data) {
+          this.visitorCount = res.count;
+        }
+      },
+      error: (err: any) => {
+        alert(err.error.message || 'Failed to load visitor count');
       }
     });
   }

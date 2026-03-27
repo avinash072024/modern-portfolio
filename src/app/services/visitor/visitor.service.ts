@@ -18,4 +18,9 @@ export class VisitorService {
   addVisitor(data: any): Observable<any> {
     return this.http.post(environment.apiUrl + '/visitor/log', data);
   }
+
+  getVisitor(): Observable<any> {
+    debugger;
+    return this.http.get(environment.apiUrl + '/visitor/all');
+  }
 }
