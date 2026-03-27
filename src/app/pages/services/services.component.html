@@ -12,7 +12,25 @@
         </div>
 
         <div class="row g-4 mt-2">
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            @for (service of services; track service?._id; let i = $index) {
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="i * 100">
+                <div class="service-card glass-card h-100 p-4">
+                    <div class="icon-box mb-4">
+                        <i [class]="service?.icon" class="text-primary display-5"></i>
+                    </div>
+                    <h3 class="fw-bold h4 mb-3">{{service?.title}}</h3>
+                    <p class="text-secondary mb-4">
+                        {{service?.description}}
+                    </p>
+                    <ul class="list-unstyled service-list mb-0">
+                        @for (feature of service?.features; track feature) {
+                        <li><i class="bi bi-check-circle-fill text-primary"></i> {{ feature }}</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+            <!-- <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="service-card glass-card h-100 p-4">
                     <div class="icon-box mb-4">
                         <i class="bi bi-code-square text-primary display-5"></i>
@@ -64,7 +82,7 @@
                         <li><i class="bi bi-check-circle-fill text-primary"></i> OAuth & Security</li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
