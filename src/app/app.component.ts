@@ -40,18 +40,14 @@ export class AppComponent implements OnInit {
       // once: true,
       mirror: false
     });
-    debugger;
     this.addNewVisitor();
   }
 
   addNewVisitor(): void {
-    debugger;
     this.visitorService.getIPDetails().subscribe({
       next: (res: any) => {
         this.ipDetails = res;
-        console.log(this.ipDetails);
         if (this.ipDetails) {
-          debugger;
           this.visitorService.addVisitor(this.ipDetails).subscribe({
             next: (res) => {
               console.log(res);
