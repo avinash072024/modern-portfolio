@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ThemeService } from './services/theme/theme.service';
 import { isPlatformBrowser } from '@angular/common';
 import { VisitorService } from './services/visitor/visitor.service';
+import { SeoService } from './services/seo/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
   isBrowser: boolean = false;
   showScrollTop: boolean = false;
   visitorService = inject(VisitorService);
+  seoService = inject(SeoService);
   ipDetails: any;
 
   constructor(
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object,
     private themeService: ThemeService
   ) {
+    this.seoService.init();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && isPlatformBrowser(this.platformId)) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
