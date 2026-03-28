@@ -73,8 +73,8 @@
 <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="mobileMenu" data-bs-backdrop="static">
     <div class="offcanvas-header py-4 px-4 d-flex justify-content-between align-items-center">
         <h5 class="offcanvas-title fw-bold">
-            <i class="bi bi-code-slash text-primary"></i> {{myInformation?.firstName | titlecase}} <span
-                class="text-primary"> {{myInformation?.lastName | titlecase}}</span>
+            <i class="bi bi-code-slash text-primary"></i> {{myInformation?.firstName || 'Avinash' | titlecase}} <span
+                class="text-primary"> {{myInformation?.lastName || 'Marbhal' | titlecase}}</span>
         </h5>
         <button type="button" class="btn-close-custom" data-bs-dismiss="offcanvas">
             <i class="bi bi-x-lg"></i>
