@@ -7,6 +7,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { SkillsComponent } from './pages/skills/skills.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
+import { OfflinePageComponent } from './pages/offline-page/offline-page.component';
 
 export const routes: Routes = [
     {
@@ -80,6 +81,17 @@ export const routes: Routes = [
           image: '/assets/images/yihwxx74geyo1xe1xejz.avif'
         }
     },
+    // {
+    //   path: 'offline',
+    //   component: OfflinePageComponent,
+    //   title: `${Constants.APP_NAME} — Offline`,
+    //   data: {
+    //     title: `${Constants.APP_NAME} — Offline`,
+    //     description: 'You are currently offline. Please check your internet connection.',
+    //     keywords: 'offline, no internet',
+    //     image: '/assets/images/yihwxx74geyo1xe1xejz.avif'
+    //   }
+    // },
     {
         path: '**',
         component: NotFoundComponent,

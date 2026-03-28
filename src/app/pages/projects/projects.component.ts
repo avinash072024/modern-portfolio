@@ -31,11 +31,11 @@ export class ProjectsComponent implements OnInit {
         if(res?.success) {
           this.projects = res?.projects;
         } else {
-          alert(res?.message);
+          // alert(res?.message);
         }
       },
       error: (err: any) => {
-        alert(err?.message)
+        // alert(err?.message)
       }
     })
   }

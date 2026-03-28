@@ -25,17 +25,17 @@ export class ServicesComponent implements OnInit {
         if (res.success) {
           this.services = res?.services || [];
         } else {
-          alert(res?.message);
+          // alert(res?.message);
         }
       },
       error: (err: any) => {
-        alert(err.message);
+        // alert(err.message);
       },
     })
   }
 
   goToContact(): void {
-    alert('Clicked');
+    // alert('Clicked');
     this.router.navigateByUrl('/contact');
   }
 }

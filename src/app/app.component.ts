@@ -1,17 +1,18 @@
 import { Component, HostListener, inject, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import * as AOS from 'aos';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ThemeService } from './services/theme/theme.service';
 import { isPlatformBrowser } from '@angular/common';
 import { VisitorService } from './services/visitor/visitor.service';
 import { SeoService } from './services/seo/seo.service';
+import { NetworkService } from './services/network/network.service';
+import { OfflinePageComponent } from './pages/offline-page/offline-page.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, OfflinePageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -21,7 +22,9 @@ export class AppComponent implements OnInit {
   showScrollTop: boolean = false;
   visitorService = inject(VisitorService);
   seoService = inject(SeoService);
+  networkService = inject(NetworkService);
   ipDetails: any;
+  isOnline: boolean = true;
 
   constructor(
     private router: Router,
@@ -38,6 +41,22 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.networkService.onlineStatus$.subscribe(status => {
+      this.isOnline = status;
+
+    //   if(!this.isOnline){
+    //   this.router.navigate(['/offline']);
+    // } else {
+    //   this.router.navigate(['/home']);
+    // }
+    });
+
+    // if(!this.isOnline){
+    //   this.router.navigate(['/offline']);
+    // } else {
+    //   this.router.navigate(['/home']);
+    // }
+
     AOS.init({
       duration: 1000,
       // once: true,
@@ -53,16 +72,16 @@ export class AppComponent implements OnInit {
         if (this.ipDetails) {
           this.visitorService.addVisitor(this.ipDetails).subscribe({
             next: (res) => {
-              console.log(res);
+              // console.log(res);
             },
             error: (err) => {
-              console.log(err);
+              // console.log(err);
             }
           });
         }
       },
       error: (err) => {
-        console.log(err);
+        // console.log(err);
       }
     });
 

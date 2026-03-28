@@ -36,7 +36,7 @@ export class FooterComponent implements OnInit {
         }
       },
       error: (err: any) => {
-        alert(err.error.message || 'Failed to load contact details');
+        // alert(err.error.message || 'Failed to load contact details');
       }
     });
   }
@@ -49,7 +49,7 @@ export class FooterComponent implements OnInit {
         }
       },
       error: (err: any) => {
-        alert(err.error.message || 'Failed to load visitor count');
+        // alert(err.error.message || 'Failed to load visitor count');
       }
     });
   }

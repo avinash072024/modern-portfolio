@@ -47,7 +47,7 @@ export class ContactComponent implements OnInit {
         }
       },
       error: (err: any) => {
-        alert(err.error.message || 'Failed to load contact details');
+        // alert(err.error.message || 'Failed to load contact details');
       }
     });
   }

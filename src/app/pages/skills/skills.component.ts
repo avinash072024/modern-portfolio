@@ -50,11 +50,11 @@ export class SkillsComponent implements OnInit {
 
           this.categories = groupedSkills;
         } else {
-          alert(res?.message);
+          // alert(res?.message);
         }
       },
       error: (err: any) => {
-        alert(err?.message);
+        // alert(err?.message);
       }
     });
   }
