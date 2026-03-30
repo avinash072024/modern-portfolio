@@ -5,6 +5,7 @@ import { AboutMe } from '../../interfaces/about-me';
 import { TitleCasePipe } from '@angular/common';
 import { ContactService } from '../../services/contact/contact.service';
 import { VisitorService } from '../../services/visitor/visitor.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -24,32 +25,28 @@ export class FooterComponent implements OnInit {
   visitorCount: number = 0;
 
   ngOnInit(): void {
-    this.getContactDetails();
-    this.getVisitor();
+    this.getInitialData();
   }
 
-  getContactDetails(): void {
-    this.contactService.getContact().subscribe({
+  getInitialData(): void {
+    forkJoin({
+      contact: this.contactService.getContact(),
+      visitor: this.visitorService.getVisitor()
+    }).subscribe({
       next: (res: any) => {
-        if (res?.success && res?.contact) {
-          this.myInformation = res.contact;
+        // Handle Contact Data
+        if (res.contact?.success && res.contact?.contact) {
+          this.myInformation = res.contact.contact;
+        }
+
+        // Handle Visitor Data
+        if (res.visitor?.success && res.visitor?.data) {
+          this.visitorCount = res.visitor.count;
         }
       },
       error: (err: any) => {
-        // alert(err.error.message || 'Failed to load contact details');
-      }
-    });
-  }
-
-  getVisitor(): void {
-    this.visitorService.getVisitor().subscribe({
-      next: (res: any) => {
-        if (res?.success && res?.data) {
-          this.visitorCount = res.count;
-        }
-      },
-      error: (err: any) => {
-        // alert(err.error.message || 'Failed to load visitor count');
+        // console.error('One or more requests failed', err);
+        // Note: forkJoin will trigger the error block if ANY of the requests fail.
       }
     });
   }

@@ -88,10 +88,10 @@ export class AppComponent implements OnInit {
 
   }
 
-  // @HostListener('document:contextmenu', ['$event'])
-  // onRightClick(event: MouseEvent) {
-  //   event.preventDefault();
-  // }
+  @HostListener('document:contextmenu', ['$event'])
+  onRightClick(event: MouseEvent) {
+    event.preventDefault();
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
