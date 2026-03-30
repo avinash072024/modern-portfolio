@@ -40,8 +40,8 @@ export class FooterComponent implements OnInit {
         }
 
         // Handle Visitor Data
-        if (res.visitor?.success && res.visitor?.data) {
-          this.visitorCount = res.visitor.count;
+        if (res.visitor?.success && res.visitor?.Visitors) {
+          this.visitorCount = res.visitor?.count;
         }
       },
       error: (err: any) => {

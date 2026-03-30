@@ -27,7 +27,7 @@
                 <ul class="list-unstyled footer-links">
                     <li><a routerLink="/">Home</a></li>
                     <li><a routerLink="/about">About</a></li>
-                    <li><a routerLink="/portfolio">Portfolio</a></li>
+                    <li><a routerLink="/projects">Portfolio</a></li>
                     <li><a routerLink="/contact">Contact</a></li>
                     <!-- <li><a routerLink="/services">Services</a></li> -->
                 </ul>
@@ -70,8 +70,14 @@
                     class="fw-bold text-emphasis">{{(myInformation?.firstName || 'Avinash') | titlecase}} {{myInformation?.lastName ||
                     'Marbhal' | titlecase}}</span>.
             </p>
-            <p class="mb-0 text-secondary small">
+            <!-- <p class="mb-0 text-secondary small">
                 Made with <i class="bi bi-heart-fill text-primary mx-1"></i> and Angular. | Visitors: {{visitorCount}}
+            </p> -->
+            <p class="mb-0 text-secondary small">
+                Made with <i class="bi bi-heart-fill text-primary mx-1"></i> and Angular.
+            </p>
+            <p class="mb-0 text-secondary small">
+                Visitors: {{visitorCount}}
             </p>
         </div>
     </div>
