@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CtaComponent } from "../../components/cta/cta.component";
 import { RouterLink } from "@angular/router";
+import { AboutService } from '../../services/about/about.service';
+import { forkJoin } from 'rxjs';
 
 export interface Experience {
   id: number,
@@ -22,8 +24,10 @@ export interface Education {
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
-export class AboutComponent {
-  
+export class AboutComponent implements OnInit {
+
+  aboutService = inject(AboutService);
+
   techStack = [
     { name: 'Angular', icon: 'bi-patch-check', level: '95%' },
     { name: 'TypeScript', icon: 'bi-code-slash', level: '90%' },
@@ -33,15 +37,67 @@ export class AboutComponent {
     { name: 'UI/UX', icon: 'bi-palette', level: '88%' }
   ];
 
-  experience: Experience[] = [
-    { id: 1, year: '2021 - 2022', designation: 'Junior Web Developer', company: 'MindLine Technologies Pvt. Ltd.' },
-    { id: 2, year: '2022 - 2024', designation: 'Web Developer', company: 'Bluebenz Digitizations Pvt. Ltd.' },
-    { id: 3, year: '2024 - Present', designation: 'Senior Web Developer', company: 'Manorama Infosolutions Pvt. Ltd.' }
-  ];
+  experiences: any;
+  education: any;
 
-  education: Education[] = [
-    { id: 1, year: '2011 - 2012', degree: 'Higher Secondary', school: 'Science Academy' },
-    { id: 2, year: '2012 - 2015', degree: 'Bachelor of Science', school: 'Shivaji University, Kolhapur' },
-    { id: 3, year: '2015 - 2018', degree: 'Master of Computer Application', school: 'Shivaji University, Kolhapur' }
-  ]
+  // experience: Experience[] = [
+  //   { id: 1, year: '2021 - 2022', designation: 'Junior Web Developer', company: 'MindLine Technologies Pvt. Ltd.' },
+  //   { id: 2, year: '2022 - 2024', designation: 'Web Developer', company: 'Bluebenz Digitizations Pvt. Ltd.' },
+  //   { id: 3, year: '2024 - Present', designation: 'Senior Web Developer', company: 'Manorama Infosolutions Pvt. Ltd.' }
+  // ];
+
+  // education: Education[] = [
+  //   { id: 1, year: '2011 - 2012', degree: 'Higher Secondary', school: 'Science Academy' },
+  //   { id: 2, year: '2012 - 2015', degree: 'Bachelor of Science', school: 'Shivaji University, Kolhapur' },
+  //   { id: 3, year: '2015 - 2018', degree: 'Master of Computer Application', school: 'Shivaji University, Kolhapur' }
+  // ]
+
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  getData() {
+    debugger;
+    forkJoin({
+      education: this.aboutService.getEducation(),
+      experience: this.aboutService.getExperience()
+    }).subscribe({
+      next: (res: any) => {
+        debugger;
+        // Access the results using the keys defined above
+        this.education = res.education?.educations || res.education || [];
+        this.experiences = res.experience?.experiences || res.experience || [];
+        console.log(this.education, this.experiences);
+        debugger
+      },
+      error: (err: any) => {
+        console.error('An error occurred while fetching data', err);
+      },
+      complete: () => {
+        // Optional: Logic to run after both requests finish (e.g., hiding a spinner)
+      }
+    });
+  }
+
+  // getEducation() {
+  //   this.aboutService.getEducation().subscribe({
+  //     next: (res: any) => {
+  //       this.education = res?.educations || res || [];
+  //     },
+  //     error: (err: any) => {
+  //       console.log(err?.error?.message || 'Failed to load educations')
+  //     }
+  //   });
+  // }
+
+  // getExperience() {
+  //   this.aboutService.getExperience().subscribe({
+  //     next: (res: any) => {
+  //       this.experiences = res?.experiences || res || [];
+  //     },
+  //     error: (err: any) => {
+  //       console.log(err?.error?.message || 'Failed to load experiences')
+  //     }
+  //   });
+  // }
 }
