@@ -4,14 +4,16 @@
 
         <div class="text-center mb-5" data-aos="fade-up">
             <!-- <h6 class="text-primary fw-bold text-uppercase tracking-widest">My Journey</h6> -->
-             <span class="badge rounded-pill bg-primary-subtle text-uppercase text-primary px-3 py-2 mb-3">My Journey</span>
+            <span class="badge rounded-pill bg-primary-subtle text-uppercase text-primary px-3 py-2 mb-3">My
+                Journey</span>
             <h2 class="display-5 fw-bold">Professional <span class="text-primary">Profile</span></h2>
             <div class="header-line mx-auto"></div>
         </div>
 
         <div class="row g-5">
             <div class="col-lg-7" data-aos="fade-right">
-                <h3 class="fw-bold mb-4">A Story of <span class="text-primary">Passion</span> & <span class="text-primary">Code</span></h3>
+                <h3 class="fw-bold mb-4">A Story of <span class="text-primary">Passion</span> & <span
+                        class="text-primary">Code</span></h3>
                 <p class="text-secondary lead mb-4">
                     I am a specialized Frontend Developer based in India, dedicated to building clean,
                     functional, and user-centered digital experiences.
@@ -23,6 +25,7 @@
                 </p>
 
                 <div class="row g-4">
+                    @if (education.length > 0 || experiences.length > 0) {
                     <div class="col-md-6">
                         <h6 class="mb-3">Education</h6>
                         <div class="education-timeline ps-3 border-start border-primary border-2">
@@ -36,6 +39,8 @@
                             }
                         </div>
                     </div>
+                    }
+                    @if (education.length > 0 || experiences.length > 0) {
                     <div class="col-md-6">
                         <h6 class="mb-3">Experience</h6>
                         <div class="education-timeline ps-3 border-start border-primary border-2">
@@ -49,8 +54,8 @@
                             }
                         </div>
                     </div>
+                    }
                 </div>
-
             </div>
 
             <div class="col-lg-5" data-aos="fade-left">
@@ -81,4 +86,5 @@
     </div>
 </section>
 
-<app-cta [title]="'Do you want to hire me?'" [subtitle]="`I'm currently available for full-time roles.`" [buttonLink]="'/contact'" [buttonText]="`Let's Chat`" />
+<app-cta [title]="'Do you want to hire me?'" [subtitle]="`I'm currently available for full-time roles.`"
+    [buttonLink]="'/contact'" [buttonText]="`Let's Chat`" />
