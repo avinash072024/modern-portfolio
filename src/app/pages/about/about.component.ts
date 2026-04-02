@@ -74,26 +74,4 @@ export class AboutComponent implements OnInit {
       }
     });
   }
-
-  // getEducation() {
-  //   this.aboutService.getEducation().subscribe({
-  //     next: (res: any) => {
-  //       this.education = res?.educations || res || [];
-  //     },
-  //     error: (err: any) => {
-  //       console.log(err?.error?.message || 'Failed to load educations')
-  //     }
-  //   });
-  // }
-
-  // getExperience() {
-  //   this.aboutService.getExperience().subscribe({
-  //     next: (res: any) => {
-  //       this.experiences = res?.experiences || res || [];
-  //     },
-  //     error: (err: any) => {
-  //       console.log(err?.error?.message || 'Failed to load experiences')
-  //     }
-  //   });
-  // }
 }

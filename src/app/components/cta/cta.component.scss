@@ -1,82 +1,9 @@
-// .cta-banner {
-//     // Uses your skin color!
-//     background-color: var(--primary-color);
-//     position: relative;
-//     overflow: hidden;
-//     border: 1px solid rgba(255, 255, 255, 0.1);
-
-//     // Subtle background pattern to make it look "premium"
-//     &::before {
-//         content: '';
-//         position: absolute;
-//         top: -50%;
-//         left: -10%;
-//         width: 300px;
-//         height: 300px;
-//         background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-//         border-radius: 50%;
-//     }
-
-//     .btn-light {
-//         color: var(--primary-color) !important; // Button text matches current skin
-//         border: none;
-//         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-
-//         &:hover {
-//             // transform: scale(1.05) translateX(5px);
-//             color: var(--bs-btn-hover-color);
-//             background-color: var(--bs-btn-hover-bg);
-//             border-color: var(--bs-btn-hover-border-color);
-//             // background-color: #fff;
-//             // box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-//         }
-//     }
-// }
-
-// .btn:hover {
-//     color: var(--bs-btn-hover-color);
-//     background-color: var(--bs-btn-hover-bg);
-//     border-color: var(--bs-btn-hover-border-color);
-// }
-
-// // Ensure responsiveness for mobile
-// @media (max-width: 768px) {
-//     .cta-banner {
-//         text-align: center;
-
-//         h2 {
-//             font-size: 2rem;
-//         }
-
-//         p {
-//             font-size: 1rem;
-//         }
-//     }
-// }
-
-// // Dark Mode Tweak: Ensure the container background is dark enough to pop
-// [data-bs-theme="dark"] {
-//     .cta-banner {
-//         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-//     }
-// }
-
-
 .cta-banner {
     position: relative;
     padding: 3.5rem 4rem;
     border-radius: 40px; // Very smooth corners per screenshot
     overflow: hidden;
     z-index: 1;
-
-    /* Transition from Skin Color to a Fixed Blue 
-       Matches the Orange-to-Blue vibe in your screenshot 
-    */
-    // background: linear-gradient(90deg,
-    //         var(--primary-color) 0%,
-    //         #3b5998 60%,
-    //         #1e3c72 100%);
-
 
     background: linear-gradient(120deg, var(--primary-color) 0%, #3b5998 75%, #1e3c72 75%);
 
