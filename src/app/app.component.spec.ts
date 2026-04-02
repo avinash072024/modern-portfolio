@@ -1,14 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-import { PLATFORM_ID } from '@angular/core';
+import { PLATFORM_ID, importProvidersFrom } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, RouterTestingModule],
-      providers: [{ provide: PLATFORM_ID, useValue: 'browser' }]
+      imports: [AppComponent, RouterTestingModule, HttpClientTestingModule],
+      providers: [{ provide: PLATFORM_ID, useValue: 'browser' }, importProvidersFrom(HttpClientTestingModule)]
     }).compileComponents();
   });
 

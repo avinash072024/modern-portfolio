@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { TestimonialsComponent } from './testimonials.component';
 
@@ -8,7 +9,7 @@ describe('TestimonialsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TestimonialsComponent]
+      imports: [TestimonialsComponent, HttpClientTestingModule]
     })
     .compileComponents();
 

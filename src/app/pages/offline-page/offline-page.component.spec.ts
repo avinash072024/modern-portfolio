@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { importProvidersFrom } from '@angular/core';
 
 import { OfflinePageComponent } from './offline-page.component';
 
@@ -8,7 +10,8 @@ describe('OfflinePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OfflinePageComponent]
+      imports: [OfflinePageComponent, HttpClientTestingModule],
+      providers: [importProvidersFrom(HttpClientTestingModule)]
     })
     .compileComponents();
 

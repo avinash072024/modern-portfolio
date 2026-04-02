@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { importProvidersFrom } from '@angular/core';
 
 import { SkillsComponent } from './skills.component';
 
@@ -9,7 +11,8 @@ describe('SkillsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SkillsComponent, RouterTestingModule]
+      imports: [SkillsComponent, RouterTestingModule, HttpClientTestingModule],
+      providers: [importProvidersFrom(HttpClientTestingModule)]
     })
     .compileComponents();
 

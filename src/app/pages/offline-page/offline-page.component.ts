@@ -95,7 +95,10 @@ export class OfflinePageComponent implements OnInit, OnDestroy {
 
   onConnectionRestored(): void {
     this.clearTimers();
-    window.location.reload();
+    const isKarma = typeof (window as any).__karma__ !== 'undefined';
+    if (!isKarma) {
+      window.location.reload();
+    }
   }
 
   private clearTimers(): void {
