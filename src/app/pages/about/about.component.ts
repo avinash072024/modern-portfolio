@@ -57,18 +57,14 @@ export class AboutComponent implements OnInit {
   }
 
   getData() {
-    debugger;
     forkJoin({
       education: this.aboutService.getEducation(),
       experience: this.aboutService.getExperience()
     }).subscribe({
       next: (res: any) => {
-        debugger;
         // Access the results using the keys defined above
         this.education = res.education?.educations || res.education || [];
         this.experiences = res.experience?.experiences || res.experience || [];
-        console.log(this.education, this.experiences);
-        debugger
       },
       error: (err: any) => {
         console.error('An error occurred while fetching data', err);

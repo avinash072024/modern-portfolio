@@ -4,8 +4,8 @@
 
             <div class="col-lg-4 col-md-6" data-aos="fade-up">
                 <a class="footer-brand fw-bold mb-3 d-inline-block" routerLink="/">
-                    {{myInformation?.firstName | titlecase}}<span class="text-primary">
-                        {{myInformation?.lastName | titlecase}}.</span>
+                    {{myInformation?.firstName || 'Avinash' | titlecase}}<span class="text-primary">
+                        {{myInformation?.lastName || 'Marbhal' | titlecase}}.</span>
                 </a>
                 <p class="text-secondary mb-4 pe-lg-5">
                     Specializing in building high-performance, modern web applications.
