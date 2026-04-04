@@ -1,0 +1,60 @@
+<div class="chatbot-container">
+  <!-- Chat Button -->
+  <button class="chat-toggle shadow-lg" [class.open]="isOpen()" (click)="toggleChat()" aria-label="Toggle Chat">
+    @if (!isOpen()) {
+    <i class="bi bi-chat-dots-fill fs-4 text-white"></i>
+    } @else {
+    <i class="bi bi-x-lg fs-4 text-white"></i>
+    }
+  </button>
+
+  <!-- Chat Window -->
+  @if (isOpen()) {
+  <div class="chat-window shadow-2xl overflow-hidden" @fadeInOut>
+    <div class="chat-header d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-2">
+        <div class="avatar">AI</div>
+        <div class="header-info">
+          <h6 class="m-0">Portfolio AI</h6>
+          <div class="d-flex align-items-center gap-1">
+            <span class="status-dot"></span>
+            <small>Online</small>
+          </div>
+        </div>
+      </div>
+      <button class="btn-close-chat" (click)="toggleChat()" aria-label="Minimize chat">
+        <i class="bi bi-dash-lg"></i>
+      </button>
+    </div>
+
+    <div class="chat-messages p-3 flex-grow-1" #scrollContainer>
+      @for (msg of messages(); track $index) {
+      <div class="message-wrapper d-flex mb-3" [class.user-message]="msg.role === 'user'"
+        [class.bot-message]="msg.role === 'model'">
+        <div class="message-bubble shadow-sm">
+          {{ msg.text }}
+        </div>
+      </div>
+      }
+
+      @if (isLoading()) {
+      <div class="message-wrapper bot-message d-flex mb-3">
+        <div class="message-bubble shadow-sm typing-indicator">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="chat-input-area">
+      <form (submit)="sendMessage()" class="input-wrapper d-flex gap-2 align-items-center">
+        <input type="text" name="chatInput" [(ngModel)]="userInput" placeholder="Ask me anything..."
+          class="form-control border-0 shadow-none bg-transparent flex-grow-1" autocomplete="off" />
+        <button type="submit" class="btn-send shadow-sm" [disabled]="!userInput().trim() || isLoading()">
+          <i class="bi bi-send-fill"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+  }
+</div>

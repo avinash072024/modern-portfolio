@@ -9,10 +9,11 @@ import { VisitorService } from './services/visitor/visitor.service';
 import { SeoService } from './services/seo/seo.service';
 import { NetworkService } from './services/network/network.service';
 import { OfflinePageComponent } from './pages/offline-page/offline-page.component';
+import { ChatbotComponent } from './components/chatbot/chatbot.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, OfflinePageComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, OfflinePageComponent, ChatbotComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
