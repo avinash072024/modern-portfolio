@@ -23,13 +23,13 @@ export class SkillsComponent implements OnInit {
       next: (res: any) => {
         if(res?.success){
           // Group skills by category based on Constants.TECH_STACK order
-          const categoryOrder = [
-            'Frontend Development',
-            'Backend & Database',
-            'Tools & Design',
-            'Version Control & DevOps',
-            'Payment Gateways'
-          ];
+          // const categoryOrder = [
+          //   'Frontend Development',
+          //   'Backend & Database',
+          //   'Tools & Design',
+          //   'Version Control & DevOps',
+          //   'Payment Gateways'
+          // ];
           
           const groupedSkills = res.skills.reduce((acc: any[], skill: any) => {
             const index = acc.findIndex((c: any) => c.title === skill.category);
@@ -42,11 +42,11 @@ export class SkillsComponent implements OnInit {
           }, []);
 
           // Sort categories by predefined order
-          groupedSkills.sort((a: any, b: any) => {
-            const indexA = categoryOrder.indexOf(a.title);
-            const indexB = categoryOrder.indexOf(b.title);
-            return (indexA === -1 ? 99 : indexA) - (indexB === -1 ? 99 : indexB);
-          });
+          // groupedSkills.sort((a: any, b: any) => {
+          //   const indexA = categoryOrder.indexOf(a.title);
+          //   const indexB = categoryOrder.indexOf(b.title);
+          //   return (indexA === -1 ? 99 : indexA) - (indexB === -1 ? 99 : indexB);
+          // });
 
           this.categories = groupedSkills;
         } else {
