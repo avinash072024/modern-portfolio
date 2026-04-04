@@ -46,7 +46,7 @@
         align-items: center;
         justify-content: center;
         font-size: 2rem;
-        background: rgba(var(--bs-emphasis-color-rgb), 0.03);
+        // background: rgba(var(--bs-emphasis-color-rgb), 0.03);
         border-radius: 12px;
     }
 
@@ -86,9 +86,9 @@
         }
 
         .skill-icon-wrapper {
-            width: 32px;
-            height: 32px;
-            font-size: 1.2rem;
+            width: 60px;
+            height: 60px;
+            font-size: 2rem;
         }
     }
 }
