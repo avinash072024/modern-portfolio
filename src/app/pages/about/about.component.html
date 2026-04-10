@@ -19,12 +19,12 @@
                     functional, and user-centered digital experiences.
                 </p>
                 <p class="text-secondary mb-5">
-                    My journey started 4 years ago when I first discovered the power of CSS. Since then,
+                    My journey started 5 years ago when I first discovered the power of CSS. Since then,
                     I’ve evolved into an Angular specialist, focusing on performance optimization and
                     modern architecture like Signals and Standalone components.
                 </p>
 
-                <div class="row g-4">
+                <div class="row g-4 d-none">
                     @if (education?.length > 0 || experiences?.length > 0) {
                     <div class="col-md-6">
                         <h6 class="mb-3">Education</h6>
@@ -44,7 +44,7 @@
                     <div class="col-md-6">
                         <h6 class="mb-3">Experience</h6>
                         <div class="education-timeline ps-3 border-start border-primary border-2">
-                            @for (edu of experiences; track $index; let i = $index) {
+                            @for (edu of experiences.slice(0,2); track $index; let i = $index) {
                             <div class="edu-item position-relative mb-4 ps-4">
                                 <div class="dot bg-primary"></div>
                                 <span class="text-primary fw-bold small">{{ edu.duration }}</span>
@@ -52,8 +52,77 @@
                                 <p class="text-muted small">{{ edu.company }}</p>
                             </div>
                             }
+                            <div class="edu-item position-relative mb-4 ps-4">
+                                <div class="dot bg-primary"></div>
+                                <span class="text-primary fw-bold small">2024 - Present</span>
+                                <h5 class="fw-bold mt-1 mb-0">Senior Software Engineer</h5>
+                                <p class="text-muted small">Traxcn Ltd.</p>
+                            </div>
                         </div>
                     </div>
+                    }
+                </div>
+
+                <div class="row g-4">
+                    @if (isLoading()) {
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Education</h6>
+                        <div class="education-timeline ps-3 border-start border-primary border-2">
+                            @for (skeleton of [1,2,3]; track skeleton) {
+                            <div class="edu-item position-relative mb-4 ps-4">
+                                <div class="dot bg-primary"></div>
+                                <div class="skeleton-line sm mb-2"></div>
+                                <div class="skeleton-line lg mb-2"></div>
+                                <div class="skeleton-line md"></div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Experience</h6>
+                        <div class="education-timeline ps-3 border-start border-primary border-2">
+                            @for (skeleton of [1,2,3]; track skeleton) {
+                            <div class="edu-item position-relative mb-4 ps-4">
+                                <div class="dot bg-primary"></div>
+                                <div class="skeleton-line sm mb-2"></div>
+                                <div class="skeleton-line lg mb-2"></div>
+                                <div class="skeleton-line md"></div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    }
+                    @else {
+                    @if (education?.length > 0) {
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Education</h6>
+                        <div class="education-timeline ps-3 border-start border-primary border-2">
+                            @for (exp of education; track $index) {
+                            <div class="edu-item position-relative mb-4 ps-4">
+                                <div class="dot bg-primary"></div>
+                                <span class="text-primary fw-bold small">{{ exp.duration || exp.year }}</span>
+                                <h5 class="fw-bold mt-1 mb-0">{{ exp.title || exp.degree }}</h5>
+                                <p class="text-muted small">{{ exp.institution || exp.school }}</p>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    }
+                    @if (experiences?.length > 0) {
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Experience</h6>
+                        <div class="education-timeline ps-3 border-start border-primary border-2">
+                            @for (edu of experiences; track $index) {
+                            <div class="edu-item position-relative mb-4 ps-4">
+                                <div class="dot bg-primary"></div>
+                                <span class="text-primary fw-bold small">{{ edu.duration || edu.year }}</span>
+                                <h5 class="fw-bold mt-1 mb-0">{{ edu.title || edu.designation }}</h5>
+                                <p class="text-muted small">{{ edu.company }}</p>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    }
                     }
                 </div>
             </div>

@@ -39,11 +39,12 @@ export class TestimonialsComponent implements OnInit {
     message: ['', Validators.required]
   });
 
-  isSubmitting = signal(false);
+  isSubmitting = signal<boolean>(false);
   isSubmitted = signal(false);
-  submitError = signal('');
-  showToast = signal(false);
-  toastMessage = signal('Feedback submitted successfully.');
+  submitError = signal<string>('');
+  showToast = signal<boolean>(false);
+  toastMessage = signal<string>('Feedback submitted successfully.');
+  isLoading = signal<boolean>(true);
 
   private toastTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
@@ -54,6 +55,7 @@ export class TestimonialsComponent implements OnInit {
   }
 
   getFeedbacks(): void {
+    this.isLoading.set(true);
     this.feedbackService.getAllFeedback().subscribe({
       next: (res: any) => {
         if (res?.success) {
@@ -61,9 +63,10 @@ export class TestimonialsComponent implements OnInit {
           this.testimonials = data.filter((item: any) => item.verified === true);
           console.log('this.testimonials:', this.testimonials)
         }
+        this.isLoading.set(false);
       },
       error: (err: any) => {
-
+        this.isLoading.set(false);
       }
     })
   }

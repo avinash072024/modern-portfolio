@@ -4,6 +4,49 @@
         <h2 class="display-6 fw-bold">What Clients Say</h2>
     </div>
 
+    @if (isLoading()) {
+    <div class="container d-none d-md-block">
+        <div class="row g-3">
+            @for (item of [0, 1, 2, 3]; track $index) {
+            <div class="col-md-3">
+                <div class="card p-4 shadow-sm rounded-5 h-100 skeleton-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="skeleton-avatar me-3"></div>
+                        <div class="flex-grow-1">
+                            <div class="skeleton-line short mb-2"></div>
+                            <div class="skeleton-line extra-short"></div>
+                        </div>
+                    </div>
+                    <div class="skeleton-line mb-2"></div>
+                    <div class="skeleton-line mb-2"></div>
+                    <div class="skeleton-line w-50"></div>
+                    <div class="mt-4 skeleton-line short"></div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    <div class="container d-block d-md-none">
+        <div class="row g-3">
+            <div class="col-md-3 px-4">
+                <div class="card p-4 shadow-sm rounded-5 h-100 skeleton-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="skeleton-avatar me-3"></div>
+                        <div class="flex-grow-1">
+                            <div class="skeleton-line short mb-2"></div>
+                            <div class="skeleton-line extra-short"></div>
+                        </div>
+                    </div>
+                    <div class="skeleton-line mb-2"></div>
+                    <div class="skeleton-line mb-2"></div>
+                    <div class="skeleton-line w-50"></div>
+                    <div class="mt-4 skeleton-line short"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
     <div class="container">
         <div class="testimonial-track">
             @for (t of testimonials; track t?._id; let i = $index) {
