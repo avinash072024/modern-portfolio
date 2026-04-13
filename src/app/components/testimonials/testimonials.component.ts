@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Testimonial } from '../../interfaces/testimonial';
 import { TESTIMONIALS } from '../../models/testimonials.data';
 import { FeedbackService } from '../../services/feedback/feedback.service';
+import { ValidationService } from '../../services/validations/validation.service';
 
 interface BootstrapModalInstance {
   hide(): void;
@@ -27,10 +28,10 @@ interface BootstrapWindow extends Window {
 })
 export class TestimonialsComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
-
+  
   // testimonials: Testimonial[] = TESTIMONIALS;
   testimonials: Testimonial[] = [];
-
+  
   feedbackForm = this.formBuilder.group({
     name: ['', Validators.required],
     organization: ['', Validators.required],
@@ -38,7 +39,7 @@ export class TestimonialsComponent implements OnInit {
     rating: [null as number | null, Validators.required],
     message: ['', Validators.required]
   });
-
+  
   isSubmitting = signal<boolean>(false);
   isSubmitted = signal(false);
   submitError = signal<string>('');
@@ -48,25 +49,27 @@ export class TestimonialsComponent implements OnInit {
 
   private toastTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  constructor(private readonly feedbackService: FeedbackService) { }
+  constructor(
+    private readonly feedbackService: FeedbackService,
+    public readonly validationService: ValidationService
+  ) { }
 
   ngOnInit(): void {
     this.getFeedbacks();
   }
 
   getFeedbacks(): void {
-    this.isLoading.set(true);
+    this.isLoading.set(true); // Start loading
     this.feedbackService.getAllFeedback().subscribe({
       next: (res: any) => {
         if (res?.success) {
           let data = res?.feedback || [];
-          this.testimonials = data.filter((item: any) => item.verified === true);
-          console.log('this.testimonials:', this.testimonials)
+          this.testimonials = data.filter((item: any) => item.verified === true) || [];
         }
-        this.isLoading.set(false);
+        this.isLoading.set(false); // Stop loading
       },
       error: (err: any) => {
-        this.isLoading.set(false);
+        this.isLoading.set(false); // Stop loading even on error
       }
     })
   }
@@ -107,6 +110,12 @@ export class TestimonialsComponent implements OnInit {
         this.submitError.set(error?.error?.message ?? 'Unable to submit feedback. Please try again.');
       }
     });
+  }
+
+  resetFeedbackForm(): void {
+    this.feedbackForm.reset({ rating: null });
+    this.isSubmitted.set(false);
+    this.submitError.set('');
   }
 
   isControlInvalid(controlName: 'name' | 'organization' | 'designation' | 'rating' | 'message'): boolean {
