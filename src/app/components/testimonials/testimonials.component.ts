@@ -168,12 +168,7 @@ export class TestimonialsComponent implements OnInit {
   }
 
   onInputChange(event: any, field: string) {
-    debugger;
     let value = event.target.value;
-
-    // value = this.validationService.onlyCharacters(value);
-    // value = this.validationService.capitalizeFirstLetter(value);
-    // value = this.validationService.capitalizeSentence(value);
 
     switch (field) {
       case 'name':
