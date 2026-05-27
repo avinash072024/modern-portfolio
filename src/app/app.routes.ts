@@ -1,13 +1,6 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
 import { Constants } from './models/constants';
-import { AboutComponent } from './pages/about/about.component';
-import { ContactComponent } from './pages/contact/contact.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { ServicesComponent } from './pages/services/services.component';
-import { SkillsComponent } from './pages/skills/skills.component';
-import { ProjectsComponent } from './pages/projects/projects.component';
-import { OfflinePageComponent } from './pages/offline-page/offline-page.component';
+
 
 export const routes: Routes = [
     {
@@ -17,7 +10,7 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: HomeComponent,
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
         title: `${Constants.APP_NAME} — Home`,
         data: {
           title: `${Constants.APP_NAME} — Home`,
@@ -28,7 +21,7 @@ export const routes: Routes = [
     },
     {
         path: 'about',
-        component: AboutComponent,
+        loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent),
         title: `${Constants.APP_NAME} — About`,
         data: {
           title: `${Constants.APP_NAME} — About`,
@@ -39,7 +32,7 @@ export const routes: Routes = [
     },
     {
         path: 'contact',
-        component: ContactComponent,
+        loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent),
         title: `${Constants.APP_NAME} — Contact`,
         data: {
           title: `${Constants.APP_NAME} — Contact`,
@@ -50,7 +43,7 @@ export const routes: Routes = [
     },
     {
         path: 'services',
-        component: ServicesComponent,
+        loadComponent: () => import('./pages/services/services.component').then(m => m.ServicesComponent),
         title: `${Constants.APP_NAME} — Services`,
         data: {
           title: `${Constants.APP_NAME} — Services`,
@@ -61,7 +54,7 @@ export const routes: Routes = [
     },
     {
         path: 'skills',
-        component: SkillsComponent,
+        loadComponent: () => import('./pages/skills/skills.component').then(m => m.SkillsComponent),
         title: `${Constants.APP_NAME} — Skills`,
         data: {
           title: `${Constants.APP_NAME} — Skills`,
@@ -72,7 +65,7 @@ export const routes: Routes = [
     },
     {
         path: 'projects',
-        component: ProjectsComponent,
+        loadComponent: () => import('./pages/projects/projects.component').then(m => m.ProjectsComponent),
         title: `${Constants.APP_NAME} — Projects`,
         data: {
           title: `${Constants.APP_NAME} — Projects`,
@@ -94,7 +87,7 @@ export const routes: Routes = [
     // },
     {
         path: '**',
-        component: NotFoundComponent,
+        loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent),
         title: '404 - Page not found',
         data: {
           title: '404 - Page not found',

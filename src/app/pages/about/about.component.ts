@@ -3,6 +3,7 @@ import { CtaComponent } from "../../components/cta/cta.component";
 import { RouterLink } from "@angular/router";
 import { AboutService } from '../../services/about/about.service';
 import { forkJoin } from 'rxjs';
+import { ExperienceService } from '../../services/experience/experience.service';
 
 export interface Experience {
   id: number,
@@ -27,6 +28,8 @@ export interface Education {
 export class AboutComponent implements OnInit {
   isLoading = signal(true);
   aboutService = inject(AboutService);
+  experienceService = inject(ExperienceService);
+  totalExperience: number = 0;
 
   techStack = [
     { name: 'Angular', icon: 'bi-patch-check', level: '95%' },
@@ -48,12 +51,14 @@ export class AboutComponent implements OnInit {
     this.isLoading.set(true);
     forkJoin({
       education: this.aboutService.getEducation(),
-      experience: this.aboutService.getExperience()
+      experience: this.aboutService.getExperience(),
+      experienceRes: this.experienceService.getExperience()
     }).subscribe({
       next: (res: any) => {
         // Access the results using the keys defined above
         this.education = res.education?.educations || res.education || [];
         this.experiences = res.experience?.experiences || res.experience || [];
+        this.totalExperience = res.experienceRes?.totalExperience || 0; 
         this.isLoading.set(false);
       },
       error: (err: any) => {
