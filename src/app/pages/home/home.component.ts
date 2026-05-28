@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { TestimonialsComponent } from '../../components/testimonials/testimonials.component';
 import { CtaComponent } from '../../components/cta/cta.component';
 import { RouterLink } from '@angular/router';
@@ -29,8 +29,12 @@ export class HomeComponent implements OnInit {
   projectService = inject(ProjectsService);
   experienceService = inject(ExperienceService);
 
+  private platformId = inject(PLATFORM_ID);
+
   ngOnInit() {
-    this.type();
+    if (isPlatformBrowser(this.platformId)) {
+      this.type();
+    }
     this.loadDashboardData();
   }
 

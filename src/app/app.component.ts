@@ -45,12 +45,14 @@ export class AppComponent implements OnInit {
       this.isOnline = status;
     });
 
-    AOS.init({
-      duration: 1000,
-      // once: true,
-      mirror: false
-    });
-    this.addNewVisitor();
+    if (this.isBrowser) {
+      AOS.init({
+        duration: 1000,
+        // once: true,
+        mirror: false
+      });
+      this.addNewVisitor();
+    }
   }
 
   addNewVisitor(): void {

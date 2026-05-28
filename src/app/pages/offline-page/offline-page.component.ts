@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, inject, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { NetworkService } from '../../services/network/network.service';
 import { Subscription } from 'rxjs';
 
@@ -13,6 +13,7 @@ export class OfflinePageComponent implements OnInit, OnDestroy {
 
   networkService = inject(NetworkService);
 
+  private platformId = inject(PLATFORM_ID);
   isRetrying = false;
   countdown = 30;
   dnsOk = false;
@@ -33,9 +34,11 @@ export class OfflinePageComponent implements OnInit, OnDestroy {
   particles: { left: string; top: string; delay: string; duration: string }[] = [];
 
   ngOnInit(): void {
-    this.generateParticles();
-    this.startCountdown();
-    this.listenForNetwork();
+    if (isPlatformBrowser(this.platformId)) {
+      this.generateParticles();
+      this.startCountdown();
+      this.listenForNetwork();
+    }
   }
 
   ngOnDestroy(): void {

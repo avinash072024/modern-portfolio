@@ -1,15 +1,22 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, fromEvent, mapTo, merge, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NetworkService {
-  private onlineStatus = new BehaviorSubject<boolean>(navigator.onLine);
+  private onlineStatus = new BehaviorSubject<boolean>(true);
   public onlineStatus$ = this.onlineStatus.asObservable();
 
-  constructor(private zone: NgZone) {
-    this.monitorNetworkStatus();
+  constructor(
+    private zone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.onlineStatus.next(navigator.onLine);
+      this.monitorNetworkStatus();
+    }
   }
 
   private monitorNetworkStatus() {
