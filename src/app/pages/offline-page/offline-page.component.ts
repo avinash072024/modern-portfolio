@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { NetworkService } from '../../services/network/network.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-offline-page',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './offline-page.component.html',
   styleUrl: './offline-page.component.scss'
 })

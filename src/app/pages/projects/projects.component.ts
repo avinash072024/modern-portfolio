@@ -2,13 +2,13 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Project } from '../../interfaces/projects';
 import { Constants } from '../../models/constants';
 import { CtaComponent } from '../../components/cta/cta.component';
-import { CommonModule } from '@angular/common';
+
 import { ProjectsService } from '../../services/projects/projects.service';
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-projects',
-  imports: [CtaComponent, CommonModule],
+  imports: [CtaComponent],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })

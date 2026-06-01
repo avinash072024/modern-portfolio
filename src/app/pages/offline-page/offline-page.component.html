@@ -7,8 +7,10 @@
 
   <!-- Floating particles -->
   <div class="particles">
-    <span class="particle" *ngFor="let p of particles; let i = index" [style.left]="p.left" [style.top]="p.top"
+    @for (p of particles; track p; let i = $index) {
+      <span class="particle" [style.left]="p.left" [style.top]="p.top"
       [style.animation-delay]="p.delay" [style.animation-duration]="p.duration"></span>
+    }
   </div>
 
   <!-- Main card -->
@@ -52,35 +54,43 @@
     <!-- Retry button + countdown -->
     <div class="action-area">
       <button class="retry-btn" (click)="retry()" [disabled]="isRetrying" id="retry-button">
-        <span class="btn-content" *ngIf="!isRetrying">
-          <i class="bi bi-arrow-clockwise me-2"></i> Try Again
-        </span>
-        <span class="btn-content" *ngIf="isRetrying">
-          <span class="spinner-ring"></span> Reconnecting…
-        </span>
+        @if (!isRetrying) {
+          <span class="btn-content">
+            <i class="bi bi-arrow-clockwise me-2"></i> Try Again
+          </span>
+        }
+        @if (isRetrying) {
+          <span class="btn-content">
+            <span class="spinner-ring"></span> Reconnecting…
+          </span>
+        }
       </button>
 
-      <p class="auto-retry-text" *ngIf="countdown > 0 && !isRetrying">
-        Auto-retry in <span class="countdown-badge">{{ countdown }}s</span>
-      </p>
+      @if (countdown > 0 && !isRetrying) {
+        <p class="auto-retry-text">
+          Auto-retry in <span class="countdown-badge">{{ countdown }}s</span>
+        </p>
+      }
     </div>
 
     <!-- Tips section -->
     <div class="tips-grid mt-2">
-      <div class="tip-card" *ngFor="let tip of tips; let i = index" [style.animation-delay]="0.1 * i + 's'">
-        <div class="tip-icon">
-          <i class="bi" [class]="tip.icon"></i>
+      @for (tip of tips; track tip; let i = $index) {
+        <div class="tip-card" [style.animation-delay]="0.1 * i + 's'">
+          <div class="tip-icon">
+            <i class="bi" [class]="tip.icon"></i>
+          </div>
+          <p class="tip-text">{{ tip.text }}</p>
         </div>
-        <p class="tip-text">{{ tip.text }}</p>
-      </div>
+      }
     </div>
 
   </div>
 
   <!-- Footer hint -->
   <!-- <p class="footer-hint">
-    <i class="bi bi-shield-check me-1 text-primary"></i>
-    Your data is safe &amp; nothing was lost.
-  </p> -->
+  <i class="bi bi-shield-check me-1 text-primary"></i>
+  Your data is safe &amp; nothing was lost.
+</p> -->
 
 </div>

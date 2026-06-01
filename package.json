@@ -4,26 +4,26 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "build:ssr": "ng run modern-portfolio:server:production",
+    "build": "ng build --configuration production",
+    "build:ssr": "ng build --configuration production && ng run modern-portfolio:server:production",
     "prerender": "ng run modern-portfolio:prerender",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:modern-portfolio": "node dist/modern-portfolio/server/server.mjs"
+    "serve:ssr:modern-portfolio": "node server.prod.mjs"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^19.0.0",
-    "@angular/common": "^19.0.0",
-    "@angular/compiler": "^19.0.0",
-    "@angular/core": "^19.0.0",
-    "@angular/forms": "^19.0.0",
-    "@angular/platform-browser": "^19.0.0",
-    "@angular/platform-browser-dynamic": "^19.0.0",
-    "@angular/platform-server": "^19.0.0",
-    "@angular/router": "^19.0.0",
-    "@angular/service-worker": "^19.0.0",
-    "@angular/ssr": "^19.0.0",
+    "@angular/animations": "^21.2.15",
+    "@angular/common": "^21.2.15",
+    "@angular/compiler": "^21.2.15",
+    "@angular/core": "^21.2.15",
+    "@angular/forms": "^21.2.15",
+    "@angular/platform-browser": "^21.2.15",
+    "@angular/platform-browser-dynamic": "^21.2.15",
+    "@angular/platform-server": "^21.2.15",
+    "@angular/router": "^21.2.15",
+    "@angular/service-worker": "^21.2.15",
+    "@angular/ssr": "^21.2.13",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
@@ -34,9 +34,9 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.0.0",
-    "@angular/cli": "^19.0.0",
-    "@angular/compiler-cli": "^19.0.0",
+    "@angular-devkit/build-angular": "^21.2.13",
+    "@angular/cli": "^21.2.13",
+    "@angular/compiler-cli": "^21.2.15",
     "@types/aos": "^3.0.7",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
@@ -48,6 +48,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.6.2"
+    "typescript": "~5.9.3"
   }
 }
