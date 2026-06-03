@@ -1,4 +1,5 @@
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, signal, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ThemeService } from '../../services/theme/theme.service';
 import { Constants } from '../../models/constants';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -15,6 +16,7 @@ import { ContactService } from '../../services/contact/contact.service';
 export class HeaderComponent {
   themeService = inject(ThemeService);
   isScrolled = signal(false);
+  private platformId = inject(PLATFORM_ID);
   appName1: string = Constants.APP_NAME1;
   appName2: string = Constants.APP_NAME2;
   currentYear: number = new Date().getFullYear();
@@ -47,7 +49,9 @@ export class HeaderComponent {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    this.isScrolled.set(window.scrollY > 50);
+    if (isPlatformBrowser(this.platformId)) {
+      this.isScrolled.set(window.scrollY > 50);
+    }
   }
 
   getContactDetails(): void {

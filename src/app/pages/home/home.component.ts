@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TestimonialsComponent } from '../../components/testimonials/testimonials.component';
 import { CtaComponent } from '../../components/cta/cta.component';
 import { RouterLink } from '@angular/router';
@@ -16,8 +16,8 @@ declare var $: any;
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  // Typing Effect Logic
-  readonly roles = ['Frontend Developer', 'Website Designer', 'Angular Specialist'];
+  // Typing Effect Logic  
+  readonly roles = ['a Frontend Developer', 'a Website Designer', 'an Angular Specialist'];
   displayText = signal('');
   private roleIndex = 0;
   private charIndex = 0;
@@ -28,9 +28,12 @@ export class HomeComponent implements OnInit {
   contactService = inject(ContactService);
   projectService = inject(ProjectsService);
   experienceService = inject(ExperienceService);
+  private platformId = inject(PLATFORM_ID);
 
   ngOnInit() {
-    this.type();
+    if (isPlatformBrowser(this.platformId)) {
+      this.type();
+    }
     this.loadDashboardData();
   }
 
@@ -53,7 +56,7 @@ export class HomeComponent implements OnInit {
     } else if (this.isDeleting && this.charIndex === 0) {
       this.isDeleting = false;
       this.roleIndex = (this.roleIndex + 1) % this.roles.length;
-      typeSpeed = 500;
+      typeSpeed = 10;
     }
 
     setTimeout(() => this.type(), typeSpeed);

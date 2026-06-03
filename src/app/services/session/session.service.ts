@@ -1,34 +1,53 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Constants } from '../../models/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
+  private isBrowser: boolean;
+  private platformId = inject(PLATFORM_ID);
+
+  constructor() {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
   // theme
   setThemeSession(theme: string): void {
-    localStorage.setItem(Constants.THEME_KEY, theme);
+    if (this.isBrowser) {
+      localStorage.setItem(Constants.THEME_KEY, theme);
+    }
   }
 
   getThemeSession(): void {
-    localStorage.getItem(Constants.THEME_KEY);
+    if (this.isBrowser) {
+      localStorage.getItem(Constants.THEME_KEY);
+    }
   }
 
   clearThemeSession(): void {
-    localStorage.removeItem(Constants.THEME_KEY);
+    if (this.isBrowser) {
+      localStorage.removeItem(Constants.THEME_KEY);
+    }
   }
 
   // skin
   setSkinSession(skinColor: string): void {
-    localStorage.setItem(Constants.SKIN_KEY, skinColor);
+    if (this.isBrowser) {
+      localStorage.setItem(Constants.SKIN_KEY, skinColor);
+    }
   }
 
   getSkinSession(): void {
-    localStorage.getItem(Constants.SKIN_KEY);
+    if (this.isBrowser) {
+      localStorage.getItem(Constants.SKIN_KEY);
+    }
   }
 
   clearSkinSession(): void {
-    localStorage.removeItem(Constants.SKIN_KEY);
+    if (this.isBrowser) {
+      localStorage.removeItem(Constants.SKIN_KEY);
+    }
   }
-
 }

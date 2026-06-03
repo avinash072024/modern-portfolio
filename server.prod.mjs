@@ -8,9 +8,11 @@ const builtServer = await import('./dist/modern-portfolio/server/main.js').catch
   process.exit(1);
 });
 
-const bootstrap = builtServer?.default || builtServer;
+const bootstrap = builtServer?.default?.default || builtServer?.default || builtServer;
 const app = express();
-const commonEngine = new CommonEngine();
+const commonEngine = new CommonEngine({
+  allowedHosts: ['localhost', '127.0.0.1', '*']
+});
 
 const browserDistFolder = resolve(process.cwd(), 'dist/modern-portfolio/browser');
 const indexHtml = resolve(browserDistFolder, 'index.html');

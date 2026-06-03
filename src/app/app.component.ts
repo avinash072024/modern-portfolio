@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import * as AOS from 'aos';
 import { FooterComponent } from './components/footer/footer.component';
@@ -23,14 +23,13 @@ export class AppComponent implements OnInit {
   visitorService = inject(VisitorService);
   seoService = inject(SeoService);
   networkService = inject(NetworkService);
+  private themeService = inject(ThemeService);
+  private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
   ipDetails: any;
   isOnline: boolean = true;
 
-  constructor(
-    private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private themeService: ThemeService
-  ) {
+  constructor() {
     this.seoService.init();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && isPlatformBrowser(this.platformId)) {
@@ -45,12 +44,14 @@ export class AppComponent implements OnInit {
       this.isOnline = status;
     });
 
-    AOS.init({
-      duration: 1000,
-      // once: true,
-      mirror: false
-    });
-    this.addNewVisitor();
+    if (this.isBrowser) {
+      AOS.init({
+        duration: 1000,
+        // once: true,
+        mirror: false
+      });
+      this.addNewVisitor();
+    }
   }
 
   addNewVisitor(): void {
