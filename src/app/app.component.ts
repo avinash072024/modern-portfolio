@@ -7,6 +7,7 @@ import { ThemeService } from './services/theme/theme.service';
 import { isPlatformBrowser } from '@angular/common';
 import { VisitorService } from './services/visitor/visitor.service';
 import { SeoService } from './services/seo/seo.service';
+import { AnalyticsService } from './services/analytics/analytics.service';
 import { NetworkService } from './services/network/network.service';
 import { OfflinePageComponent } from './pages/offline-page/offline-page.component';
 
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
   showScrollTop: boolean = false;
   visitorService = inject(VisitorService);
   seoService = inject(SeoService);
+  analyticsService = inject(AnalyticsService);
   networkService = inject(NetworkService);
   private themeService = inject(ThemeService);
   private router = inject(Router);
@@ -45,6 +47,7 @@ export class AppComponent implements OnInit {
     });
 
     if (this.isBrowser) {
+      this.analyticsService.init();
       AOS.init({
         duration: 1000,
         // once: true,

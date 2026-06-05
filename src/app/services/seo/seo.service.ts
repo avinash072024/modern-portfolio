@@ -1,9 +1,9 @@
-import { Injectable, inject, DOCUMENT } from '@angular/core';
+import { Injectable, inject, DOCUMENT, Inject } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 
-import { Inject } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +53,7 @@ export class SeoService {
       this.metaService.updateTag({ name: 'twitter:image', content: data.image });
     }
 
-    const url = 'https://avinash-modern-portfolio.netlify.app' + this.router.url;
+    const url = environment.siteUrl + this.router.url;
     this.metaService.updateTag({ property: 'og:url', content: url });
     this.updateCanonicalUrl(url);
   }
