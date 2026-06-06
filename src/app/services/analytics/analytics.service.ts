@@ -83,7 +83,7 @@ export class AnalyticsService {
     this.initialized = true;
   }
 
-  private trackRouteChanges(measurementId: string): void {
+  trackRouteChanges(measurementId: string): void {
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe(() => {
