@@ -78,6 +78,15 @@ export class TestimonialsComponent implements OnInit {
     return Array(5).fill(false).map((_, i) => i < rating);
   }
 
+  getAvatarUrl(name: string): string {
+    const primary = getComputedStyle(document.documentElement)
+      .getPropertyValue('--primary-color')
+      .trim()
+      .replace('#', '');
+    const safeName = encodeURIComponent(name || 'User');
+    return `https://ui-avatars.com/api/?name=${safeName}&background=${primary}&color=ffffff&rounded=true&bold=true&size=80`;
+  }
+
   onFeedbackSubmit(): void {
     this.isSubmitted.set(true);
 

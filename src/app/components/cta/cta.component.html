@@ -1,16 +1,30 @@
-<div class="container py-5 my-5" data-aos="flip-up">
-    <div class="cta-banner shadow-lg d-flex flex-column flex-md-row justify-content-between align-items-center">
-        <div class="cta-content text-center text-md-start position-relative">
-            <h2 class="fw-bold text-white mb-2">{{title}}</h2>
-            <p class="mb-0 text-white opacity-80">{{subtitle}}</p>
-        </div>
+<section class="cta-section" aria-label="Call to action">
+    <div class="container py-5 my-4 my-lg-5" data-aos="fade-up">
+        <div class="cta-banner">
+            <div class="cta-orb cta-orb--1" aria-hidden="true"></div>
+            <div class="cta-orb cta-orb--2" aria-hidden="true"></div>
+            <div class="cta-orb cta-orb--3" aria-hidden="true"></div>
+            <div class="cta-grid" aria-hidden="true"></div>
+            <div class="cta-shine" aria-hidden="true"></div>
 
-        <div class="cta-action position-relative">
-            <a [routerLink]="buttonLink" class="btn btn-white-pill shadow-sm">
-                {{buttonText}} <i class="bi bi-arrow-right ms-2"></i>
-            </a>
-        </div>
+            <div class="cta-inner">
+                <div class="cta-content text-center text-md-start">
+                    <div class="cta-icon-wrap d-md-none" aria-hidden="true">
+                        <i class="bi bi-stars"></i>
+                    </div>
+                    <h2 class="cta-title">{{ title }}</h2>
+                    <p class="cta-subtitle mb-0">{{ subtitle }}</p>
+                </div>
 
-        <div class="cta-gloss-overlay"></div>
+                <div class="cta-action">
+                    <a [routerLink]="buttonLink" class="btn-cta">
+                        <span class="btn-cta__label">{{ buttonText }}</span>
+                        <span class="btn-cta__icon" aria-hidden="true">
+                            <i class="bi bi-arrow-right"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
