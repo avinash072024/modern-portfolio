@@ -26,7 +26,7 @@ describe('TestimonialsComponent', () => {
     fixture.detectChanges();
     expect(component.testimonials.length).toBeGreaterThan(0);
     const el: HTMLElement = fixture.nativeElement;
-    const firstName = el.querySelector('.testimonial-slide h6')?.textContent || '';
+    const firstName = el.querySelector('.testimonial-author__name')?.textContent || '';
     expect(firstName).toContain(component.testimonials[0].name);
   });
 });

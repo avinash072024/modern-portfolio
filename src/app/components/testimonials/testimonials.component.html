@@ -1,123 +1,122 @@
-<section class="py-5 bg-body-tertiary overflow-hidden">
-    <div class="container text-center mb-5" data-aos="fade-up">
-        <h6 class="text-primary fw-bold text-uppercase">Testimonials</h6>
-        <h2 class="display-6 fw-bold">What Clients Say</h2>
+<section class="testimonials-section py-5 overflow-hidden" aria-label="Client testimonials">
+    <div class="section-glow" aria-hidden="true"></div>
+
+    <div class="container position-relative">
+        <header class="testimonials-header text-center mb-5" data-aos="fade-up">
+            <span class="badge rounded-pill testimonials-badge text-uppercase px-3 py-2 mb-3">
+                Testimonials
+            </span>
+            <h2 class="display-5 fw-bold mb-3">
+                What <span class="text-primary">Clients Say</span>
+            </h2>
+            <p class="testimonials-subtitle text-secondary mx-auto mb-0">
+                Real feedback from people — building trust through shared experiences.
+            </p>
+        </header>
     </div>
 
     @if (isLoading()) {
-    <div class="container d-none d-md-block">
-        <div class="row g-3">
-            @for (item of [0, 1, 2, 3]; track $index) {
-            <div class="col-md-3">
-                <div class="card p-4 shadow-sm rounded-5 h-100 skeleton-card">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="skeleton-avatar me-3"></div>
-                        <div class="flex-grow-1">
-                            <div class="skeleton-line short mb-2"></div>
-                            <div class="skeleton-line extra-short"></div>
+    <div class="testimonials-marquee testimonials-marquee--loading" aria-busy="true" aria-label="Loading testimonials">
+        <div class="testimonial-track no-animation skeleton-track">
+            @for (item of [0, 1, 2, 3]; track item) {
+            <div class="testimonial-slide skeleton-slide skeleton-slide-{{item + 1}}">
+                <article class="testimonial-card skeleton-card">
+                    <div class="testimonial-card__quote skeleton-line short" aria-hidden="true"></div>
+                    <div class="testimonial-card__body">
+                        <div class="skeleton-line mb-2"></div>
+                        <div class="skeleton-line mb-2"></div>
+                        <div class="skeleton-line w-75 mb-4"></div>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="skeleton-avatar"></div>
+                            <div class="flex-grow-1">
+                                <div class="skeleton-line short mb-2"></div>
+                                <div class="skeleton-line extra-short"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="skeleton-line mb-2"></div>
-                    <div class="skeleton-line mb-2"></div>
-                    <div class="skeleton-line w-50"></div>
-                    <div class="mt-4 skeleton-line short"></div>
-                </div>
+                </article>
             </div>
             }
         </div>
     </div>
-    <div class="container d-block d-md-none">
-        <div class="row g-3">
-            <div class="col-md-3 px-4">
-                <div class="card p-4 shadow-sm rounded-5 h-100 skeleton-card">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="skeleton-avatar me-3"></div>
-                        <div class="flex-grow-1">
-                            <div class="skeleton-line short mb-2"></div>
-                            <div class="skeleton-line extra-short"></div>
+    } @else if (testimonials.length > 0) {
+    <div class="testimonials-marquee" [style.--slide-count]="testimonials.length">
+        <div class="testimonials-fade testimonials-fade--left" aria-hidden="true"></div>
+        <div class="testimonials-fade testimonials-fade--right" aria-hidden="true"></div>
+
+        <div class="testimonial-track" [class.no-animation]="testimonials.length < 2"
+            [class.testimonial-track--centered]="testimonials.length === 1">
+            @for (item of marqueeItems; track item.key) {
+            <div class="testimonial-slide">
+                <article class="testimonial-card">
+                    <div class="testimonial-card__glow" aria-hidden="true"></div>
+                    <!-- <i class="bi bi-quote testimonial-card__quote" aria-hidden="true"></i> -->
+
+                    <div class="testimonial-card__body">
+                        <p class="testimonial-card__message mb-0">{{ item.testimonial.message }}</p>
+
+                        <div class="testimonial-card__footer">
+                            <div class="testimonial-author">
+                                <img class="testimonial-author__avatar" [src]="getAvatarUrl(item.testimonial.name)"
+                                    width="48" height="48" [alt]="item.testimonial.name + ' avatar'" loading="lazy" />
+                                <div class="testimonial-author__info">
+                                    <h6 class="testimonial-author__name mb-0">{{ item.testimonial.name }}</h6>
+                                    <small class="testimonial-author__role">
+                                        {{ item.testimonial.designation }}, {{ item.testimonial.organization }}
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-rating"
+                                [attr.aria-label]="item.testimonial.rating + ' out of 5 stars'">
+                                @for (filled of getStars(item.testimonial.rating || 0); track $index) {
+                                <i class="bi testimonial-rating__star"
+                                    [class.bi-star-fill]="filled"
+                                    [class.bi-star]="!filled"
+                                    [class.is-filled]="filled"
+                                    aria-hidden="true"></i>
+                                }
+                            </div>
                         </div>
                     </div>
-                    <div class="skeleton-line mb-2"></div>
-                    <div class="skeleton-line mb-2"></div>
-                    <div class="skeleton-line w-50"></div>
-                    <div class="mt-4 skeleton-line short"></div>
-                </div>
+                </article>
             </div>
+            }
+        </div>
+    </div>
+    } @else {
+    <div class="container">
+        <div class="testimonials-empty text-center" data-aos="fade-up">
+            <div class="testimonials-empty__icon" aria-hidden="true">
+                <i class="bi bi-chat-heart"></i>
+            </div>
+            <p class="testimonials-empty__text mb-0">
+                No testimonials yet. Be the first to share your experience!
+            </p>
         </div>
     </div>
     }
 
-    <div class="container">
-        <div class="testimonial-track">
-            @for (t of testimonials; track t?._id; let i = $index) {
-            <div class="testimonial-slide">
-                <div class="card border-0 shadow-sm rounded-5 p-4 m-3 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="avatar me-3">
-                            <!-- <i class="bi bi-person-circle fs-1 text-primary"></i> -->
-                            <img [src]="`https://ui-avatars.com/api/?name=${t?.name}&background=random&color=ffffff&rounded=true`" width="40" height="40"
-                                [alt]="`${t?.name} Avatar`">
-                        </div>
-                        <div class="text-start">
-                            <h6 class="mb-0 fw-bold">{{ t?.name }}</h6>
-                            <small class="text-muted">{{ t?.designation }}, {{ t?.organization }}</small>
-                        </div>
-                    </div>
-                    <p class="italic mb-0"> {{ t?.message }} </p>
-                    <div class="mt-3 text-start">
-                        <i *ngFor="let filled of getStars(t?.rating || 0)" class="bi me-1 fs-5"
-                            [ngClass]="filled ? 'bi-star-fill text-primary' : 'bi-star text-secondary'">
-                        </i>
-                    </div>
-                </div>
-            </div>
-            }
-            @for (t of testimonials; track t?._id; let i = $index) {
-            <div class="testimonial-slide">
-                <div class="card border-0 shadow-sm rounded-5 p-4 m-3 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="avatar me-3">
-                            <!-- <i class="bi bi-person-circle fs-1 text-primary"></i> -->
-                            <img [src]="`https://ui-avatars.com/api/?name=${t?.name}&background=random&color=ffffff&rounded=true`" width="40" height="40"
-                                [alt]="`${t?.name} Avatar`">
-                        </div>
-                        <div class="text-start">
-                            <h6 class="mb-0 fw-bold">{{ t?.name }}</h6>
-                            <small class="text-muted">{{ t?.designation }}, {{ t?.organization }}</small>
-                        </div>
-                    </div>
-                    <p class="italic mb-0"> {{ t?.message }} </p>
-                    <div class="mt-3 text-start">
-                        <i *ngFor="let filled of getStars(t?.rating || 0)" class="bi me-1 fs-5"
-                            [ngClass]="filled ? 'bi-star-fill text-primary' : 'bi-star text-secondary'">
-                        </i>
-                    </div>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row mt-5 pt-5">
-            <div class="col-12 text-center">
-                <button type="button" class="btn btn-primary px-4 rounded-pill" data-bs-toggle="modal"
-                    data-bs-target="#feedbackModal">
-                    Share Your feedback <i class="fa-solid fa-share"></i>
-                </button>
-            </div>
+    <div class="container testimonials-cta-wrap">
+        <div class="text-center mt-5 pt-3" data-aos="fade-up">
+            <button type="button" class="btn-feedback" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                <span class="btn-feedback__label">Share Your Feedback</span>
+                <span class="btn-feedback__icon" aria-hidden="true">
+                    <i class="bi bi-send-fill"></i>
+                </span>
+            </button>
         </div>
     </div>
 </section>
 
 <!-- Modal -->
 <div class="modal fade" id="feedbackModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    aria-labelledby="feedbackModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <form class="modal-content rounded-5 shadow" [formGroup]="feedbackForm" (ngSubmit)="onFeedbackSubmit()"
             novalidate autocomplete="off">
             <div class="modal-header">
-                <div style="width: 85%;">
+                <div class="modal-header__content">
                     <h1 class="modal-title fs-4 fw-bold" id="feedbackModalLabel">Share your feedback</h1>
                     <p class="mb-0 small feedback-subtitle">Your response helps improve experience and trust.</p>
                 </div>
@@ -167,7 +166,8 @@
                 <div class="mb-1">
                     <label for="feedbackMessage" class="form-label">Message</label>
                     <textarea id="feedbackMessage" class="form-control" formControlName="message" rows="4"
-                        [class.is-invalid]="isControlInvalid('message')" placeholder="Describe" (input)="onInputChange($event, 'message')"></textarea>
+                        [class.is-invalid]="isControlInvalid('message')" placeholder="Describe your experience"
+                        (input)="onInputChange($event, 'message')"></textarea>
                     <div class="invalid-feedback">Please write your feedback.</div>
                 </div>
 

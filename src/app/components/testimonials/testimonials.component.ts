@@ -74,6 +74,16 @@ export class TestimonialsComponent implements OnInit {
     })
   }
 
+  get marqueeItems(): { testimonial: Testimonial; key: string }[] {
+    const sets = this.testimonials.length > 1 ? [0, 1] : [0];
+    return sets.flatMap((set) =>
+      this.testimonials.map((testimonial) => ({
+        testimonial,
+        key: `${testimonial._id ?? testimonial.name}-${set}`
+      }))
+    );
+  }
+
   getStars(rating: number): boolean[] {
     return Array(5).fill(false).map((_, i) => i < rating);
   }
