@@ -2,10 +2,11 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { SkillCategory } from '../../interfaces/skills';
 import { Constants } from '../../models/constants';
 import { SkillsService } from '../../services/skills/skills.service';
+import { CtaComponent } from '../../components/cta/cta.component';
 
 @Component({
   selector: 'app-skills',
-  imports: [],
+  imports: [CtaComponent],
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.scss'
 })

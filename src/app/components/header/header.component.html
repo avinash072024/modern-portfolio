@@ -1,9 +1,13 @@
 <nav class="navbar navbar-expand-lg fixed-top transition-all" [class.scrolled]="isScrolled()">
   <div class="container">
-    <a class="navbar-brand fw-bold fs-3" routerLink="/">
-      <i class="bi bi-code-slash text-primary"></i> {{myInformation?.firstName || 'Avinash' | titlecase}}<span
-    class="text-primary"> {{myInformation?.lastName || 'Marbhal' | titlecase}}.</span>
-  </a>
+    <a class="navbar-brand logo-brand" routerLink="/">
+      <span class="logo-badge">
+        <span class="logo-initials">{{ (myInformation?.firstName || 'A')[0] | uppercase }}{{ (myInformation?.lastName || 'M')[0] | uppercase }}</span>
+      </span>
+      <span class="logo-text">
+        <span class="logo-first">{{ myInformation?.firstName || 'Avinash' | titlecase }}</span><span class="logo-last">{{ myInformation?.lastName || 'Marbhal' | titlecase }}.</span>
+      </span>
+    </a>
 
   <div class="d-flex align-items-center gap-3 order-lg-last">
     <div class="dropdown">
@@ -74,10 +78,14 @@
 
 <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="mobileMenu" data-bs-backdrop="static">
   <div class="offcanvas-header py-4 px-4 d-flex justify-content-between align-items-center">
-    <h5 class="offcanvas-title fw-bold">
-      <i class="bi bi-code-slash text-primary"></i> {{myInformation?.firstName || 'Avinash' | titlecase}} <span
-    class="text-primary"> {{myInformation?.lastName || 'Marbhal' | titlecase}}</span>
-  </h5>
+    <a class="navbar-brand logo-brand" routerLink="/">
+      <span class="logo-badge">
+        <span class="logo-initials">{{ (myInformation?.firstName || 'A')[0] | uppercase }}{{ (myInformation?.lastName || 'M')[0] | uppercase }}</span>
+      </span>
+      <span class="logo-text">
+        <span class="logo-first">{{ myInformation?.firstName || 'Avinash' | titlecase }}</span><span class="logo-last">{{ myInformation?.lastName || 'Marbhal' | titlecase }}.</span>
+      </span>
+    </a>
   <button type="button" class="btn-close-custom" data-bs-dismiss="offcanvas">
     <i class="bi bi-x-lg"></i>
   </button>
