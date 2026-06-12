@@ -8,8 +8,10 @@
 
 [[plugins]]
   package = "@netlify/plugin-sitemap"
-  package = "netlify-plugin-submit-sitemap"
 
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+  
 [plugins.inputs]
 
 	# The base url of your site (optional, default = main URL set in Netlify)
