@@ -14,8 +14,12 @@
             box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.45);
         }
 
-        .logo-last {
-            letter-spacing: 0.01em;
+        // .logo-last {
+        //     letter-spacing: 0.01em;
+        // }
+
+        .logo-first {
+            color: var(--primary-color);
         }
     }
 }
