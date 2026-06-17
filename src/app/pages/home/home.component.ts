@@ -7,6 +7,9 @@ import { ContactService } from '../../services/contact/contact.service';
 import { ProjectsService } from '../../services/projects/projects.service';
 import { forkJoin } from 'rxjs';
 import { ExperienceService } from '../../services/experience/experience.service';
+import { HttpClient } from '@angular/common/http';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ResumesService } from '../../services/resume/resumes.service';
 declare var $: any;
 
 @Component({
@@ -27,8 +30,14 @@ export class HomeComponent implements OnInit {
   totalExperience: number = 0;
   contactService = inject(ContactService);
   projectService = inject(ProjectsService);
+  resumesService = inject(ResumesService);
   experienceService = inject(ExperienceService);
   private platformId = inject(PLATFORM_ID);
+  resumeAvailable!: boolean;
+
+  dynamicResumeUrl: SafeUrl | null = null;
+
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -62,24 +71,6 @@ export class HomeComponent implements OnInit {
     setTimeout(() => this.type(), typeSpeed);
   }
 
-  downloadResume(): void {
-    const link = document.createElement('a');
-    link.setAttribute('target', '_blank');
-    link.setAttribute('href', 'assets/resume/Avinash-Marbhal-Resume-Angular-Updated.pdf'); // Path to your file
-    link.setAttribute('download', 'Avinash-Marbhal-Resume-Angular.pdf'); // Desired filename
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    const modalEl = document.getElementById('staticBackdrop');
-    // Use Bootstrap's JS modal if available, otherwise fallback to jQuery if present
-    if ((window as any).bootstrap && modalEl) {
-      const bsModal = new (window as any).bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
-      bsModal.show();
-    } else if (typeof $ !== 'undefined' && $('#staticBackdrop').modal) {
-      $('#staticBackdrop').modal('show');
-    }
-  }
-
   loadDashboardData(): void {
     forkJoin({
       contactRes: this.contactService.getContact(),
@@ -105,10 +96,59 @@ export class HomeComponent implements OnInit {
 
       },
       error: (err: any) => {
-        // Handle common error
         console.error(err?.error?.message || 'Failed to load dashboard data');
       }
     });
+  }
+
+  downloadResume(): void {
+    this.resumesService.getResumes().subscribe({
+      next: (res: any) => {
+        console.log('API Response:', res);
+        if(res?.success !== true || !res?.resumes || res?.resumes.length === 0) {
+          this.resumeAvailable = false;
+          this.showModal();
+          return
+        }
+
+        let base64 = res?.resumes[0].pdfData || res;
+
+        const pureBase64 = base64.includes(',') ? base64.split(',')[1] : base64;
+
+        const byteCharacters = atob(pureBase64);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+        const blobUrl = window.URL.createObjectURL(blob);
+        this.dynamicResumeUrl = this.sanitizer.bypassSecurityTrustUrl(blobUrl);
+
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = res?.resumes[0].fileName || 'resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        this.resumeAvailable = true;
+        this.showModal();
+      },
+      error: (err: any) => {
+        console.error('Error fetching resume from API:', err);
+      }
+    });
+  }
+
+  private showModal(): void {
+    const modalEl = document.getElementById('staticBackdrop');
+    if ((window as any).bootstrap && modalEl) {
+      const bsModal = new (window as any).bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+      bsModal.show();
+    } else if (typeof $ !== 'undefined' && ($ as any)('#staticBackdrop').modal) {
+      ($ as any)('#staticBackdrop').modal('show');
+    }
   }
 
 }
