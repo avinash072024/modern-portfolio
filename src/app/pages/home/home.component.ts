@@ -20,7 +20,7 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
   // Typing Effect Logic  
-  readonly roles = ['a Frontend Developer', 'a Website Designer', 'an Angular Specialist'];
+  readonly roles = ['a Frontend Developer', 'a Website Developer', 'an Angular Specialist'];
   displayText = signal('');
   private roleIndex = 0;
   private charIndex = 0;
