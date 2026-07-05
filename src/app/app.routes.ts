@@ -74,17 +74,6 @@ export const routes: Routes = [
           image: '/assets/images/yihwxx74geyo1xe1xejz.avif'
         }
     },
-    // {
-    //   path: 'offline',
-    //   component: OfflinePageComponent,
-    //   title: `${Constants.APP_NAME} — Offline`,
-    //   data: {
-    //     title: `${Constants.APP_NAME} — Offline`,
-    //     description: 'You are currently offline. Please check your internet connection.',
-    //     keywords: 'offline, no internet',
-    //     image: '/assets/images/yihwxx74geyo1xe1xejz.avif'
-    //   }
-    // },
     {
         path: '**',
         loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent),

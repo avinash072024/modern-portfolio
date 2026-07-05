@@ -1,11 +1,16 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Constants } from '../../models/constants';
-import { AboutMe } from '../../interfaces/about-me';
 import { TitleCasePipe } from '@angular/common';
 import { ContactService } from '../../services/contact/contact.service';
 import { VisitorService } from '../../services/visitor/visitor.service';
 import { forkJoin } from 'rxjs';
+
+interface dynamicObject {
+  id: number;
+  name: string;
+  path: string;
+}
 
 @Component({
   selector: 'app-footer',
@@ -15,7 +20,6 @@ import { forkJoin } from 'rxjs';
 })
 export class FooterComponent implements OnInit {
   currentYear: number = new Date().getFullYear();
-  // myInformation: AboutMe = Constants.ABOUT_ME;
   myInformation: any;
   appName1: string = Constants.APP_NAME1;
   appName2: string = Constants.APP_NAME2;
@@ -24,6 +28,20 @@ export class FooterComponent implements OnInit {
   isLoading = signal(true); // 1. Added loading signal
 
   visitorCount: number = 0;
+
+  exploreMoreLinks: dynamicObject[] = [
+    { id: 1, name: 'About Me', path: '/about' },
+    { id: 2, name: 'Skills', path: '/skills' },
+    { id: 3, name: 'Projects', path: '/projects' },
+    { id: 4, name: 'Contact', path: '/contact' }
+  ];
+
+  focusAreaBadges: dynamicObject[] = [
+    { id: 1, name: 'Angular 14+', path: '' },
+    { id: 2, name: 'Bootstrap 5.3', path: '' },
+    { id: 3, name: 'Performance', path: '' },
+    { id: 4, name: 'Themeable UI', path: '' }
+  ];
 
   ngOnInit(): void {
     this.getInitialData();

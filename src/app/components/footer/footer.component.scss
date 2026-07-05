@@ -309,7 +309,7 @@
 
     .footer-heading {
         letter-spacing: 0.12rem;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         color: var(--bs-emphasis-color);
         opacity: 0.85;
     }
@@ -374,6 +374,11 @@
                     transform-origin: bottom left;
                 }
             }
+        }
+
+        p {
+            color: var(--bs-secondary-color);
+            // margin-bottom: 0;
         }
     }
 

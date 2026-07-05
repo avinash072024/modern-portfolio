@@ -4,7 +4,6 @@ import { ThemeService } from '../../services/theme/theme.service';
 import { Constants } from '../../models/constants';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AboutMe } from '../../interfaces/about-me';
 import { ContactService } from '../../services/contact/contact.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class HeaderComponent {
   appName1: string = Constants.APP_NAME1;
   appName2: string = Constants.APP_NAME2;
   currentYear: number = new Date().getFullYear();
-  // myInformation: AboutMe = Constants.ABOUT_ME;
   myInformation: any;
   contactService = inject(ContactService);
 
@@ -36,7 +34,7 @@ export class HeaderComponent {
 
   navLinks = [
     { id: 1, path: '/home', label: 'Home' },
-    { id: 2, path: '/about', label: 'About' },
+    { id: 2, path: '/about', label: 'About Me' },
     { id: 3, path: '/services', label: 'Services' },
     { id: 4, path: '/projects', label: 'Projects' },
     { id: 5, path: '/skills', label: 'Skills' },
