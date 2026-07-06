@@ -323,6 +323,7 @@
 
     .desc-item-card {
         padding: 16px 20px;
+        // padding: 5px 10px;
         border-radius: 16px;
         background: rgba(var(--bs-emphasis-color-rgb), 0.02);
         border: 1px solid rgba(var(--bs-emphasis-color-rgb), 0.04);
@@ -344,7 +345,8 @@
         background: rgba(var(--bs-emphasis-color-rgb), 0.03);
         border: 1px solid rgba(var(--bs-emphasis-color-rgb), 0.08);
         color: var(--bs-emphasis-color);
-        padding: 8px 20px;
+        // padding: 8px 20px;
+        padding: 5px 15px;
         border-radius: 12px;
         font-size: 0.9rem;
         font-weight: 600;
@@ -375,6 +377,7 @@
 
 .text-truncate-3 {
     display: -webkit-box;
+    line-clamp: 3;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;

@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Project } from '../../interfaces/projects';
-import { Constants } from '../../models/constants';
 import { CtaComponent } from '../../components/cta/cta.component';
 
 import { ProjectsService } from '../../services/projects/projects.service';
@@ -14,9 +13,9 @@ declare var bootstrap: any;
 })
 export class ProjectsComponent implements OnInit {
 
-  selectedProject: any = null;
+  // selectedProject: Project | null = null;
+  selectedProject: Project | any;
 
-  // projects: Project[] = Constants.PROJECTS;
   projects: Project[] = [];
 
   projectService = inject(ProjectsService);
@@ -41,7 +40,7 @@ export class ProjectsComponent implements OnInit {
     })
   }
 
-  openProjectModal(project: any) {
+  openProjectModal(project: Project) {
     this.selectedProject = project;
     const modalElement = document.getElementById('projectModal');
     const modal = new bootstrap.Modal(modalElement);

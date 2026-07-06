@@ -5,9 +5,11 @@ export interface ProjectDescription {
 export interface Project {
     title: string;
     category: string;
-    date: string;
+    completedYear: string;
     desc: ProjectDescription[];
     image: string;
     tools: string[];
-    link: string
+    link: string,
+    clientName?: string;
+    teamSize?: number;
 }
