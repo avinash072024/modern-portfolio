@@ -276,9 +276,12 @@
           </button>
         </div>
         <div class="modal-body">
-          <p class="mb-3">Thanks for downloading my resume. Please check in <strong>Download</strong> folder.</p>
+          <p class="mb-3">Thanks for downloading my resume. If the download didn't start,
+            <a [href]="dynamicResumeUrl || '#'" target="_blank" rel="noopener">click here</a>.
+          </p>
           <div class="modal-actions">
             <button type="button" class="btn-modal-secondary" data-bs-dismiss="modal">Close</button>
+            <a [href]="dynamicResumeUrl || '#'" target="_blank" class="btn-modal-primary">Open file</a>
           </div>
         </div>
       } @else {
