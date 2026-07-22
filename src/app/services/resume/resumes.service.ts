@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, shareReplay, tap } from 'rxjs/operators';
-import { environment } from '../../../environments/environment.development';
+import { catchError, shareReplay } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +23,12 @@ export class ResumesService {
       );
     }
     return this.cachedResumes$;
+  }
+
+  getATSResume(): Observable<Blob> {
+    return this.http.get(`${environment.apiUrl}/resumes/generate-ats`, {
+      responseType: 'blob',
+    });
   }
 
   downloadPdfFromBase64(base64Data: string, fileName: string): void {

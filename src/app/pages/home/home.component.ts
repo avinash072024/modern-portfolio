@@ -102,17 +102,48 @@ export class HomeComponent implements OnInit {
   }
 
   downloadResume(): void {
+    debugger;
+    this.resumesService.getATSResume().subscribe({
+      next: (blob: Blob) => {
+        debugger;
+        const blobUrl = window.URL.createObjectURL(blob);
+        this.dynamicResumeUrl = this.sanitizer.bypassSecurityTrustUrl(blobUrl);
+
+        const fileName = this.myInformation
+          ? `${this.myInformation.firstName || 'Avinash'}_${this.myInformation.lastName || 'Marbhal'}_Resume_Angular.pdf`
+          : 'Resume_Angular.pdf';
+
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        this.resumeAvailable = true;
+        this.showModal();
+        debugger;
+      },
+      error: (err: any) => {
+        debugger;
+        console.error('Error fetching ATS resume from API:', err);
+        // this.downloadUploadedResume();
+        this.resumeAvailable = false;
+      }
+    });
+  }
+
+  private downloadUploadedResume(): void {
     this.resumesService.getResumes().subscribe({
       next: (res: any) => {
         console.log('API Response:', res);
-        if(res?.success !== true || !res?.resumes || res?.resumes.length === 0) {
+        if (res?.success !== true || !res?.resumes || res?.resumes.length === 0 || !res?.resumes[0]?.pdfData) {
           this.resumeAvailable = false;
           this.showModal();
-          return
+          return;
         }
 
-        let base64 = res?.resumes[0].pdfData || res;
-
+        let base64 = res.resumes[0].pdfData;
         const pureBase64 = base64.includes(',') ? base64.split(',')[1] : base64;
 
         const byteCharacters = atob(pureBase64);
@@ -136,7 +167,9 @@ export class HomeComponent implements OnInit {
         this.showModal();
       },
       error: (err: any) => {
-        console.error('Error fetching resume from API:', err);
+        console.error('Error fetching uploaded resume from API:', err);
+        this.resumeAvailable = false;
+        this.showModal();
       }
     });
   }
