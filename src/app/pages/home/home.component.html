@@ -46,9 +46,14 @@
             View Portfolio
             <i class="bi bi-arrow-up-right ms-2"></i>
           </a>
-          <button (click)="downloadResume()" class="btn-hero-secondary">
-            Download CV
-            <i class="bi bi-download ms-2"></i>
+          <button (click)="downloadResume()" class="btn-hero-secondary" [disabled]="isDownloading()">
+            @if(isDownloading()){
+              <div class="spinner-border spinner-border-sm me-2"></div>
+              Downloading...
+            } @else {
+              Download CV
+              <i class="bi bi-download ms-2"></i>
+            }
           </button>
         </div>
 

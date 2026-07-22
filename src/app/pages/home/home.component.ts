@@ -20,8 +20,9 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
   // Typing Effect Logic  
-  readonly roles = ['a Frontend Developer', 'a Website Developer', 'an Angular Specialist'];
-  displayText = signal('');
+  readonly roles: string[] = ['a Frontend Developer', 'a Website Developer', 'an Angular Specialist'];
+  displayText = signal<string>('');
+  isDownloading = signal<boolean>(false);
   private roleIndex = 0;
   private charIndex = 0;
   private isDeleting = false;
@@ -103,9 +104,11 @@ export class HomeComponent implements OnInit {
 
   downloadResume(): void {
     debugger;
+    this.isDownloading.set(true);
     this.resumesService.getATSResume().subscribe({
       next: (blob: Blob) => {
         debugger;
+
         const blobUrl = window.URL.createObjectURL(blob);
         this.dynamicResumeUrl = this.sanitizer.bypassSecurityTrustUrl(blobUrl);
 
@@ -119,7 +122,7 @@ export class HomeComponent implements OnInit {
         document.body.appendChild(link);
         link.click();
         link.remove();
-
+        this.isDownloading.set(false);
         this.resumeAvailable = true;
         this.showModal();
         debugger;
@@ -128,7 +131,9 @@ export class HomeComponent implements OnInit {
         debugger;
         console.error('Error fetching ATS resume from API:', err);
         // this.downloadUploadedResume();
+        this.isDownloading.set(false);
         this.resumeAvailable = false;
+        this.showModal();
       }
     });
   }
