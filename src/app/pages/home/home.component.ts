@@ -122,11 +122,9 @@ export class HomeComponent implements OnInit {
   }
 
   downloadResume(): void {
-    debugger;
     this.isDownloading.set(true);
     this.resumesService.getATSResume().subscribe({
       next: (blob: Blob) => {
-        debugger;
 
         const blobUrl = window.URL.createObjectURL(blob);
         this.dynamicResumeUrl = this.sanitizer.bypassSecurityTrustUrl(blobUrl);
@@ -144,10 +142,8 @@ export class HomeComponent implements OnInit {
         this.isDownloading.set(false);
         this.resumeAvailable = true;
         this.showModal();
-        debugger;
       },
       error: (err: any) => {
-        debugger;
         console.error('Error fetching ATS resume from API:', err);
         // this.downloadUploadedResume();
         this.isDownloading.set(false);
