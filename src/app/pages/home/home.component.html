@@ -48,11 +48,11 @@
           </a>
           <button (click)="downloadResume()" class="btn-hero-secondary" [disabled]="isDownloading()">
             @if(isDownloading()){
-              <div class="spinner-border spinner-border-sm me-2"></div>
-              Downloading...
+            <div class="spinner-border spinner-border-sm me-2"></div>
+            Downloading...
             } @else {
-              Download CV
-              <i class="bi bi-download ms-2"></i>
+            Download CV
+            <i class="bi bi-download ms-2"></i>
             }
           </button>
         </div>
@@ -71,31 +71,32 @@
             </a>
           } -->
           @if (myInformation?.linkedin) {
-            <a [href]="myInformation.linkedin" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
-              <i class="bi bi-linkedin"></i>
-            </a>
+          <a [href]="myInformation.linkedin" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
+            <i class="bi bi-linkedin"></i>
+          </a>
           } @else {
-            <a href="https://linkedin.com/" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
-              <i class="bi bi-linkedin"></i>
-            </a>
+          <a href="https://linkedin.com/" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
+            <i class="bi bi-linkedin"></i>
+          </a>
           }
           @if(myInformation?.email) {
-            <a [href]="`mailto:${myInformation?.email}`" target="_blank" rel="noopener" class="social-icon-btn" title="Email">
-              <i class="bi bi-envelope-fill"></i>
-            </a>
+          <a [href]="`mailto:${myInformation?.email}`" target="_blank" rel="noopener" class="social-icon-btn"
+            title="Email">
+            <i class="bi bi-envelope-fill"></i>
+          </a>
           } @else {
-            <a routerLink="/contact" class="social-icon-btn" title="Email">
-              <i class="bi bi-envelope-fill"></i>
-            </a>
+          <a routerLink="/contact" class="social-icon-btn" title="Email">
+            <i class="bi bi-envelope-fill"></i>
+          </a>
           }
           @if (myInformation?.instagram) {
-            <a [href]="myInformation.instagram" target="_blank" rel="noopener" class="social-icon-btn" title="Instagram">
-              <i class="bi bi-instagram"></i>
-            </a>
+          <a [href]="myInformation.instagram" target="_blank" rel="noopener" class="social-icon-btn" title="Instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
           } @else {
-            <a href="https://instagram.com/" target="_blank" rel="noopener" class="social-icon-btn" title="Instagram">
-              <i class="bi bi-instagram"></i>
-            </a>
+          <a href="https://instagram.com/" target="_blank" rel="noopener" class="social-icon-btn" title="Instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
           }
         </div>
       </div>
@@ -110,38 +111,10 @@
 
           <!-- Profile image -->
           <div class="profile-frame">
-            <img src="assets/images/yihwxx74geyo1xe1xejz.avif"
-                 alt="Avinash Marbhal — profile photo"
-                 class="profile-photo" loading="lazy" decoding="async" fetchpriority="high">
+            <img src="assets/images/yihwxx74geyo1xe1xejz.avif" alt="Avinash Marbhal — profile photo"
+              class="profile-photo" loading="lazy" decoding="async" fetchpriority="high">
             <div class="profile-glow"></div>
           </div>
-
-          <!-- Floating cards -->
-          <!-- <div class="float-card card-exp" data-aos="fade-right" data-aos-delay="500">
-            <div class="float-icon">
-              <i class="bi bi-briefcase-fill"></i>
-            </div>
-            <div class="float-info">
-              <span class="float-num">{{totalExperience}}+</span>
-              <span class="float-label">Years Exp.</span>
-            </div>
-          </div>
-
-          <div class="float-card card-proj" data-aos="fade-left" data-aos-delay="600">
-            <div class="float-icon">
-              <i class="bi bi-layers-fill"></i>
-            </div>
-            <div class="float-info">
-              <span class="float-num">{{ projectsCount }}</span>
-              <span class="float-label">Projects Done</span>
-            </div>
-          </div> -->
-
-          <!-- Tech badge chips orbiting -->
-          <!-- <div class="tech-chip chip-angular">Angular</div>
-          <div class="tech-chip chip-ts">TypeScript</div>
-          <div class="tech-chip chip-node">Node.js</div> -->
-
         </div>
       </div>
 
@@ -186,14 +159,9 @@
 
         <!-- Skill tags -->
         <div class="skill-tags">
-          <span class="skill-tag">Angular</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">RxJS</span>
-          <span class="skill-tag">SCSS / CSS</span>
-          <span class="skill-tag">Node.js</span>
-          <span class="skill-tag">REST APIs</span>
-          <span class="skill-tag">Bootstrap</span>
-          <span class="skill-tag">Git</span>
+          @for (tag of skillTags; track tag.id) {
+          <span class="skill-tag">{{ tag.label }}</span>
+          }
         </div>
       </div>
 
@@ -232,7 +200,7 @@
             <span class="stat-label">Projects</span>
           </div>
           <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
-            <span class="stat-num">{{totalExperience}}+</span>
+            <span class="stat-num">{{totalExperience}}</span>
             <span class="stat-label">Years Exp.</span>
           </div>
           <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
@@ -252,11 +220,8 @@
 
 
 <!-- ═══════════════════════════════════════════ CTA ═══════════════════════════════════════════ -->
-<app-cta
-  [title]="'Ready to start a project?'"
-  [subtitle]="`I'm currently available for freelance work.`"
-  [buttonLink]="'/contact'"
-  [buttonText]="`Let's Chat`" />
+<app-cta [title]="'Ready to start a project?'" [subtitle]="`I'm currently available for freelance work.`"
+  [buttonLink]="'/contact'" [buttonText]="`Let's Chat`" />
 
 
 <!-- ═══════════════════════════════════════════ RESUME MODAL ═══════════════════════════════════════════ -->
@@ -266,50 +231,50 @@
     <div class="modal-content">
 
       @if (resumeAvailable) {
-        <div class="modal-header">
-          <div class="d-flex align-items-center gap-3">
-            <div class="modal-icon-wrap success">
-              <i class="bi bi-file-earmark-check-fill"></i>
-            </div>
-            <div>
-              <h5 class="modal-title mb-0" id="staticBackdropLabel">Resume Downloaded</h5>
-              <small class="text-white-50">CV has been saved to your device.</small>
-            </div>
+      <div class="modal-header">
+        <div class="d-flex align-items-center gap-3">
+          <div class="modal-icon-wrap success">
+            <i class="bi bi-file-earmark-check-fill"></i>
           </div>
-          <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p class="mb-3">Thanks for downloading my resume. If the download didn't start,
-            <a [href]="dynamicResumeUrl || '#'" target="_blank" rel="noopener">click here</a>.
-          </p>
-          <div class="modal-actions">
-            <button type="button" class="btn-modal-secondary" data-bs-dismiss="modal">Close</button>
-            <a [href]="dynamicResumeUrl || '#'" target="_blank" class="btn-modal-primary">Open file</a>
+          <div>
+            <h5 class="modal-title mb-0" id="staticBackdropLabel">Resume Downloaded</h5>
+            <small class="text-white-50">CV has been saved to your device.</small>
           </div>
         </div>
+        <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-3">Thanks for downloading my resume. If the download didn't start,
+          <a [href]="dynamicResumeUrl || '#'" target="_blank" rel="noopener">click here</a>.
+        </p>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-secondary" data-bs-dismiss="modal">Close</button>
+          <a [href]="dynamicResumeUrl || '#'" target="_blank" class="btn-modal-primary">Open file</a>
+        </div>
+      </div>
       } @else {
-        <div class="modal-header">
-          <div class="d-flex align-items-center gap-3">
-            <div class="modal-icon-wrap error">
-              <i class="bi bi-exclamation-triangle-fill"></i>
-            </div>
-            <div>
-              <h5 class="modal-title mb-0" id="staticBackdropLabel">Download Failed</h5>
-              <small class="text-white-50">CV could not be saved.</small>
-            </div>
+      <div class="modal-header">
+        <div class="d-flex align-items-center gap-3">
+          <div class="modal-icon-wrap error">
+            <i class="bi bi-exclamation-triangle-fill"></i>
           </div>
-          <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p class="mb-3">Sorry, the resume is currently unavailable. Please try again later.</p>
-          <div class="modal-actions">
-            <button type="button" class="btn-modal-secondary" data-bs-dismiss="modal">Close</button>
+          <div>
+            <h5 class="modal-title mb-0" id="staticBackdropLabel">Download Failed</h5>
+            <small class="text-white-50">CV could not be saved.</small>
           </div>
         </div>
+        <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-3">Sorry, the resume is currently unavailable. Please try again later.</p>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
       }
 
     </div>

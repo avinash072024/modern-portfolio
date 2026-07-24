@@ -12,6 +12,11 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ResumesService } from '../../services/resume/resumes.service';
 declare var $: any;
 
+interface SkillsTag {
+  id: number;
+  label: string;
+}
+
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterLink, TestimonialsComponent, CtaComponent],
@@ -37,6 +42,20 @@ export class HomeComponent implements OnInit {
   resumeAvailable!: boolean;
 
   dynamicResumeUrl: SafeUrl | null = null;
+
+  skillTags: SkillsTag[] = [
+    { id: 1, label: 'Angular' },
+    { id: 2, label: 'TypeScript' },
+    { id: 3, label: 'RxJS' },
+    { id: 4, label: 'HTML5 / CSS3' },
+    { id: 5, label: 'SCSS / SASS' },
+    { id: 6, label: 'Angular Material' },
+    { id: 7, label: 'REST APIs' },
+    { id: 8, label: 'Node.js' },
+    { id: 9, label: 'Bootstrap' },
+    { id: 10, label: 'Tailwind CSS' },
+    { id: 11, label: 'Git' }
+  ];
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
