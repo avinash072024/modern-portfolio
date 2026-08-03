@@ -3,6 +3,7 @@ import { Project } from '../../interfaces/projects';
 import { CtaComponent } from '../../components/cta/cta.component';
 
 import { ProjectsService } from '../../services/projects/projects.service';
+import { SocketService } from '../../services/socket/socket.service';
 declare var bootstrap: any;
 
 @Component({
@@ -19,15 +20,22 @@ export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
 
   projectService = inject(ProjectsService);
+  socketService = inject(SocketService);
   isLoading = signal(true); // 1. Add loading signal
 
   ngOnInit(): void {
     this.getProjects();
+    this.socketService.onEvent<any>('projects-updated').subscribe(() => this.getProjects(true));
+    this.socketService.onEvent<any>('data-updated').subscribe((payload) => {
+      if (!payload?.resource || payload.resource === 'projects') {
+        this.getProjects(true);
+      }
+    });
   }
 
-  getProjects(): void {
+  getProjects(forceRefresh: boolean = false): void {
     this.isLoading.set(true);
-    this.projectService.getProjects().subscribe({
+    this.projectService.getProjects(forceRefresh).subscribe({
       next: (res: any) => {
         if (res?.success) {
           this.projects = res?.projects;

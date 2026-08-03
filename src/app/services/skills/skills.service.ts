@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { environment } from '../../../environments/environment.development';
+import { SocketService } from '../socket/socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,14 @@ export class SkillsService {
   private cache = new Map<string, { timestamp: number; obs: Observable<any> }>();
   private cacheTTL = 1000 * 60 * 5; // 5 minutes
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private socketService: SocketService) {
+    this.socketService.onEvent('skills-updated').subscribe(() => this.clearCache());
+    this.socketService.onEvent<any>('data-updated').subscribe((payload) => {
+      if (!payload || payload.resource === 'skills') {
+        this.clearCache();
+      }
+    });
+  }
 
   private getCached(key: string, fetch: () => Observable<any>): Observable<any> {
     const now = Date.now();
@@ -31,7 +39,10 @@ export class SkillsService {
     return this.getCached(key, () => this.http.get(`${environment.apiUrl}/skills${params}`));
   }
 
-  getSkills(): Observable<any> {
+  getSkills(forceRefresh: boolean = false): Observable<any> {
+    if (forceRefresh) {
+      this.cache.delete('skills_all');
+    }
     return this.getCached('skills_all', () => this.http.get(`${environment.apiUrl}/skills`));
   }
 
@@ -53,5 +64,9 @@ export class SkillsService {
   deleteSkill(id: string): Observable<any> {
     this.cache.clear();
     return this.http.delete(environment.apiUrl + `/skills/${id}`)
+  }
+
+  private clearCache(): void {
+    this.cache.clear();
   }
 }

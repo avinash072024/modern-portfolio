@@ -10,6 +10,7 @@ import { SeoService } from './services/seo/seo.service';
 import { AnalyticsService } from './services/analytics/analytics.service';
 import { NetworkService } from './services/network/network.service';
 import { OfflinePageComponent } from './pages/offline-page/offline-page.component';
+import { SocketService } from './services/socket/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
   private themeService = inject(ThemeService);
   private router = inject(Router);
   private platformId = inject(PLATFORM_ID);
+  private socketService = inject(SocketService);
   ipDetails: any;
   isOnline: boolean = true;
 
@@ -47,6 +49,7 @@ export class AppComponent implements OnInit {
     });
 
     if (this.isBrowser) {
+      this.socketService.connect();
       this.analyticsService.init();
       AOS.init({
         duration: 1000,

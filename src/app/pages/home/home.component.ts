@@ -10,6 +10,7 @@ import { ExperienceService } from '../../services/experience/experience.service'
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ResumesService } from '../../services/resume/resumes.service';
+import { SocketService } from '../../services/socket/socket.service';
 declare var $: any;
 
 interface SkillsTag {
@@ -38,6 +39,7 @@ export class HomeComponent implements OnInit {
   projectService = inject(ProjectsService);
   resumesService = inject(ResumesService);
   experienceService = inject(ExperienceService);
+  socketService = inject(SocketService);
   private platformId = inject(PLATFORM_ID);
   resumeAvailable!: boolean;
 
@@ -64,6 +66,14 @@ export class HomeComponent implements OnInit {
       this.type();
     }
     this.loadDashboardData();
+    this.socketService.onEvent<any>('data-updated').subscribe((payload) => {
+      if (!payload?.resource || ['contact', 'projects', 'experience'].includes(payload.resource)) {
+        this.loadDashboardData();
+      }
+    });
+    this.socketService.onEvent('contact-updated').subscribe(() => this.loadDashboardData());
+    this.socketService.onEvent('projects-updated').subscribe(() => this.loadDashboardData());
+    this.socketService.onEvent('experience-updated').subscribe(() => this.loadDashboardData());
   }
 
   type() {

@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { SkillCategory } from '../../interfaces/skills';
 import { Constants } from '../../models/constants';
 import { SkillsService } from '../../services/skills/skills.service';
+import { SocketService } from '../../services/socket/socket.service';
 import { CtaComponent } from '../../components/cta/cta.component';
 import { CommonModule } from '@angular/common';
 
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class SkillsComponent implements OnInit {
   categories: any[] = [];
   skillsService = inject(SkillsService);
+  socketService = inject(SocketService);
   isLoading = signal(true);
   activeCategory = signal<string>('All');
 
@@ -27,11 +29,17 @@ export class SkillsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSkills();
+    this.socketService.onEvent<any>('skills-updated').subscribe(() => this.getSkills(true));
+    this.socketService.onEvent<any>('data-updated').subscribe((payload) => {
+      if (!payload?.resource || payload.resource === 'skills') {
+        this.getSkills(true);
+      }
+    });
   }
 
-  getSkills(): void {
+  getSkills(forceRefresh: boolean = false): void {
     this.isLoading.set(true);
-    this.skillsService.getSkills().subscribe({
+    this.skillsService.getSkills(forceRefresh).subscribe({
       next: (res: any) => {
         if(res?.success){
           const groupedSkills = res.skills.reduce((acc: any[], skill: any) => {
