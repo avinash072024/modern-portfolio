@@ -35,8 +35,8 @@
       </div>
       }
       } @else {
-      @for (project of projects; track project.title) {
-      <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" [attr.data-aos-delay]="$index * 100">
+      @for (project of projects; track project._id; let i = $index) {
+      <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
         <div class="project-card h-100 d-flex flex-column border-1 shadow">
           <!-- Image Container -->
           <div class="card-img-container">

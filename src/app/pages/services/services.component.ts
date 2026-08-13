@@ -35,12 +35,15 @@ export class ServicesComponent implements OnInit, OnDestroy {
       .onRefreshOrDataUpdated(['services', 'service'])
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.getServices(true);
+        this.getServices(true, true);
       });
   }
 
-  getServices(forceRefresh: boolean = false): void {
-    this.isLoading.set(true); // 2. Set to true before call
+  getServices(forceRefresh: boolean = false, isSilent: boolean = false): void {
+    // this.isLoading.set(true); // 2. Set to true before call
+    if (!isSilent) {
+      this.isLoading.set(true);
+    }
     this.servicesService.getServices(forceRefresh).subscribe({
       next: (res: any) => {
         if (res.success) {

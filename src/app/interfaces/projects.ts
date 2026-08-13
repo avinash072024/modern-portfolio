@@ -3,6 +3,7 @@ export interface ProjectDescription {
 }
 
 export interface Project {
+    _id: string;
     title: string;
     category: string;
     completedYear: string;
