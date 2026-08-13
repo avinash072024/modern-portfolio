@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AboutMe } from '../../interfaces/about-me';
@@ -8,6 +8,8 @@ import { EmailService } from '../../services/email/email.service';
 import { ValidationService } from '../../services/validations/validation.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { ToastComponent } from "../../components/toast/toast.component";
+import { SocketService } from '../../services/socket/socket.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-contact',
@@ -16,7 +18,7 @@ import { ToastComponent } from "../../components/toast/toast.component";
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
 
   contactForm!: FormGroup;
   fb = inject(FormBuilder);
@@ -27,10 +29,27 @@ export class ContactComponent implements OnInit {
   emailService = inject(EmailService);
   validationService = inject(ValidationService);
   toastService = inject(ToastService);
+  socketService = inject(SocketService);
+  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
     this.initForm();
     this.getContactDetails();
+    this.subscribeToSocketUpdates();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private subscribeToSocketUpdates(): void {
+    this.socketService
+      .onRefreshOrDataUpdated(['contact'])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getContactDetails();
+      });
   }
 
   initForm(): void {

@@ -1,9 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { Project } from '../../interfaces/projects';
 import { CtaComponent } from '../../components/cta/cta.component';
 
 import { ProjectsService } from '../../services/projects/projects.service';
 import { SocketService } from '../../services/socket/socket.service';
+import { Subject, takeUntil } from 'rxjs';
 declare var bootstrap: any;
 
 @Component({
@@ -12,7 +13,7 @@ declare var bootstrap: any;
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, OnDestroy {
 
   // selectedProject: Project | null = null;
   selectedProject: Project | any;
@@ -21,16 +22,26 @@ export class ProjectsComponent implements OnInit {
 
   projectService = inject(ProjectsService);
   socketService = inject(SocketService);
+  private destroy$ = new Subject<void>();
   isLoading = signal(true); // 1. Add loading signal
 
   ngOnInit(): void {
     this.getProjects();
-    this.socketService.onEvent<any>('projects-updated').subscribe(() => this.getProjects(true));
-    this.socketService.onEvent<any>('data-updated').subscribe((payload) => {
-      if (!payload?.resource || payload.resource === 'projects') {
+    this.subscribeToSocketUpdates();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private subscribeToSocketUpdates(): void {
+    this.socketService
+      .onRefreshOrDataUpdated(['projects', 'project'])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
         this.getProjects(true);
-      }
-    });
+      });
   }
 
   getProjects(forceRefresh: boolean = false): void {

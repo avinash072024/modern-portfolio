@@ -1,11 +1,11 @@
-import { Component, inject, OnInit, signal, PLATFORM_ID } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TestimonialsComponent } from '../../components/testimonials/testimonials.component';
 import { CtaComponent } from '../../components/cta/cta.component';
 import { RouterLink } from '@angular/router';
 import { ContactService } from '../../services/contact/contact.service';
 import { ProjectsService } from '../../services/projects/projects.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subject, takeUntil } from 'rxjs';
 import { ExperienceService } from '../../services/experience/experience.service';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -24,7 +24,7 @@ interface SkillsTag {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   // Typing Effect Logic  
   readonly roles: string[] = ['a Frontend Developer', 'a Website Developer', 'an Angular Specialist'];
   displayText = signal<string>('');
@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   experienceService = inject(ExperienceService);
   socketService = inject(SocketService);
   private platformId = inject(PLATFORM_ID);
+  private destroy$ = new Subject<void>();
   resumeAvailable!: boolean;
 
   dynamicResumeUrl: SafeUrl | null = null;
@@ -66,14 +67,21 @@ export class HomeComponent implements OnInit {
       this.type();
     }
     this.loadDashboardData();
-    this.socketService.onEvent<any>('data-updated').subscribe((payload) => {
-      if (!payload?.resource || ['contact', 'projects', 'experience'].includes(payload.resource)) {
+    this.subscribeToSocketUpdates();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private subscribeToSocketUpdates(): void {
+    this.socketService
+      .onRefreshOrDataUpdated(['contact', 'projects', 'project', 'experience'])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
         this.loadDashboardData();
-      }
-    });
-    this.socketService.onEvent('contact-updated').subscribe(() => this.loadDashboardData());
-    this.socketService.onEvent('projects-updated').subscribe(() => this.loadDashboardData());
-    this.socketService.onEvent('experience-updated').subscribe(() => this.loadDashboardData());
+      });
   }
 
   type() {

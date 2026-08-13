@@ -11,12 +11,12 @@
             </p>
         </div>
 
-        @if (!isLoading() && categories.length > 0) {
+        @if (!isLoading() && categories().length > 0) {
         <div class="category-tabs d-flex flex-wrap justify-content-center gap-2 mb-5" data-aos="fade-up">
             <button class="btn btn-filter" [class.active]="activeCategory() === 'All'" (click)="setActiveCategory('All')">
                 <i class="bi-grid-fill me-2"></i>All Skills
             </button>
-            @for (category of categories; track category.title) {
+            @for (category of categories(); track category.title) {
             <button class="btn btn-filter" [class.active]="activeCategory() === category.title" (click)="setActiveCategory(category.title)">
                 {{category.title}}
             </button>

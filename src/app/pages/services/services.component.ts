@@ -1,8 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CtaComponent } from "../../components/cta/cta.component";
 import { ServiceService } from '../../services/service/service.service';
 import { Service } from '../../interfaces/service';
+import { SocketService } from '../../services/socket/socket.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-services',
@@ -10,19 +12,36 @@ import { Service } from '../../interfaces/service';
   templateUrl: './services.component.html',
   styleUrl: './services.component.scss'
 })
-export class ServicesComponent implements OnInit {
+export class ServicesComponent implements OnInit, OnDestroy {
   services: Service[] = [];
   isLoading = signal(true); // 1. Add loading signal
   router = inject(Router);
   servicesService = inject(ServiceService);
+  socketService = inject(SocketService);
+  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
     this.getServices();
+    this.subscribeToSocketUpdates();
   }
 
-  getServices(): void {
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private subscribeToSocketUpdates(): void {
+    this.socketService
+      .onRefreshOrDataUpdated(['services', 'service'])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getServices(true);
+      });
+  }
+
+  getServices(forceRefresh: boolean = false): void {
     this.isLoading.set(true); // 2. Set to true before call
-    this.servicesService.getServices().subscribe({
+    this.servicesService.getServices(forceRefresh).subscribe({
       next: (res: any) => {
         if (res.success) {
           this.services = res?.services || [];

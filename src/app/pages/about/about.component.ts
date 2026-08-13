@@ -1,9 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { CtaComponent } from "../../components/cta/cta.component";
 import { RouterLink } from "@angular/router";
 import { AboutService } from '../../services/about/about.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subject, takeUntil } from 'rxjs';
 import { ExperienceService } from '../../services/experience/experience.service';
+import { SocketService } from '../../services/socket/socket.service';
 
 export interface Experience {
   id: number,
@@ -25,10 +26,12 @@ export interface Education {
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, OnDestroy {
   isLoading = signal(true);
   aboutService = inject(AboutService);
   experienceService = inject(ExperienceService);
+  socketService = inject(SocketService);
+  private destroy$ = new Subject<void>();
   totalExperience: number = 0;
 
   techStack = [
@@ -45,6 +48,21 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+    this.subscribeToSocketUpdates();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private subscribeToSocketUpdates(): void {
+    this.socketService
+      .onRefreshOrDataUpdated(['educations', 'education', 'experiences', 'experience'])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getData();
+      });
   }
 
   getData() {

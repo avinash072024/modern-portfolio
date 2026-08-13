@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Testimonial } from '../../interfaces/testimonial';
 import { FeedbackService } from '../../services/feedback/feedback.service';
 import { ValidationService } from '../../services/validations/validation.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { ToastComponent } from "../toast/toast.component";
+import { SocketService } from '../../services/socket/socket.service';
+import { Subject, takeUntil } from 'rxjs';
 
 interface BootstrapModalInstance {
   hide(): void;
@@ -27,9 +29,13 @@ interface BootstrapWindow extends Window {
   templateUrl: './testimonials.component.html',
   styleUrl: './testimonials.component.scss'
 })
-export class TestimonialsComponent implements OnInit {
+export class TestimonialsComponent implements OnInit, OnDestroy {
+  @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
+
   private readonly formBuilder = inject(FormBuilder);
   toastService = inject(ToastService);
+  socketService = inject(SocketService);
+  private destroy$ = new Subject<void>();
 
   // testimonials: Testimonial[] = TESTIMONIALS;
   testimonials: Testimonial[] = [];
@@ -58,20 +64,36 @@ export class TestimonialsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFeedbacks();
+    this.subscribeToSocketUpdates();
   }
 
-  getFeedbacks(): void {
-    this.isLoading.set(true); // Start loading
-    this.feedbackService.getAllFeedback().subscribe({
+  private subscribeToSocketUpdates(): void {
+    this.socketService
+      .onRefreshOrDataUpdated(['feedback', 'feedbacks'])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getFeedbacks(true);
+      });
+  }
+
+  getFeedbacks(isSilent: boolean = false): void {
+    if (!isSilent) {
+      this.isLoading.set(true); // Start loading
+    }
+    this.feedbackService.getAllFeedback(isSilent).subscribe({
       next: (res: any) => {
         if (res?.success) {
           let data = res?.feedback || [];
           this.testimonials = data.filter((item: any) => item.verified === true) || [];
         }
-        this.isLoading.set(false); // Stop loading
+        if (!isSilent) {
+          this.isLoading.set(false); // Stop loading
+        }
       },
       error: (err: any) => {
-        this.isLoading.set(false); // Stop loading even on error
+        if (!isSilent) {
+          this.isLoading.set(false); // Stop loading even on error
+        }
       }
     })
   }
@@ -166,6 +188,8 @@ export class TestimonialsComponent implements OnInit {
     if (this.toastTimeoutId) {
       clearTimeout(this.toastTimeoutId);
     }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private hideFeedbackModal(): void {
@@ -222,5 +246,12 @@ export class TestimonialsComponent implements OnInit {
     }
 
     event.target.value = value;
+  }
+
+  scrollCarousel(direction: 'left' | 'right') {
+    if (this.scrollContainer) {
+      const scrollAmount = direction === 'left' ? -420 : 420;
+      this.scrollContainer.nativeElement.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
   }
 }

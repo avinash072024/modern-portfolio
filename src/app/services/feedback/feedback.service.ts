@@ -28,7 +28,10 @@ export class FeedbackService {
     return this.http.post<CreateFeedbackResponse>(`${environment.apiUrl}/feedback`, payload);
   }
 
-  getAllFeedback(): Observable<{ success: boolean; count: number; feedback: CreateFeedbackPayload }> {
+  getAllFeedback(forceRefresh: boolean = false): Observable<{ success: boolean; count: number; feedback: CreateFeedbackPayload }> {
+    if (forceRefresh) {
+      this.feedbackRequest$ = null;
+    }
     if (!this.feedbackRequest$) {
       this.feedbackRequest$ = this.http
         .get<{ success: boolean; count: number; feedback: CreateFeedbackPayload }>(`${environment.apiUrl}/feedback`)

@@ -11,7 +11,7 @@ export class ServiceService {
   constructor(private http: HttpClient) { }
 
   // GET /api/services
-  getServices(): Observable<Service[]> {
+  getServices(forceRefresh: boolean = false): Observable<Service[]> {
     return this.http.get<Service[]>(`${environment.apiUrl}/services`);
   }
 }
