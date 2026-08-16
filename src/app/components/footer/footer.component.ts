@@ -37,9 +37,9 @@ export class FooterComponent implements OnInit {
   ];
 
   focusAreaBadges: dynamicObject[] = [
-    { id: 1, name: 'Angular 14+', path: '' },
-    { id: 2, name: 'Bootstrap 4+', path: '' },
-    { id: 3, name: 'Performance', path: '' },
+    { id: 1, name: 'Angular 19', path: '' },
+    { id: 2, name: 'Bootstrap', path: '' },
+    { id: 3, name: 'Angular PWA', path: '' },
     { id: 4, name: 'Themeable UI', path: '' }
   ];
 
