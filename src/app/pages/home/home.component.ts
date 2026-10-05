@@ -152,7 +152,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
         const fileName = this.myInformation
           ? `${this.myInformation.firstName || 'Avinash'}_${this.myInformation.lastName || 'Marbhal'}_Resume_Angular.pdf`
-          : 'Resume_Angular.pdf';
+          : 'Avinash_Marbhal_Resume_Angular.pdf';
 
         const link = document.createElement('a');
         link.href = blobUrl;
