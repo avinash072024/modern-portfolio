@@ -1,8 +1,6 @@
 import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AboutMe } from '../../interfaces/about-me';
-import { Constants } from '../../models/constants';
 import { ContactService } from '../../services/contact/contact.service';
 import { EmailService } from '../../services/email/email.service';
 import { ValidationService } from '../../services/validations/validation.service';
@@ -10,12 +8,11 @@ import { ToastService } from '../../services/toast/toast.service';
 import { ToastComponent } from "../../components/toast/toast.component";
 import { SocketService } from '../../services/socket/socket.service';
 import { Subject, takeUntil } from 'rxjs';
-import { TooltipDirective } from '../../directives/tooltip.directive';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, ToastComponent, TooltipDirective],
+  imports: [FormsModule, ReactiveFormsModule, ToastComponent],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
