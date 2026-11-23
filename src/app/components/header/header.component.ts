@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
 import { ContactService } from '../../services/contact/contact.service';
 import { SocketService } from '../../services/socket/socket.service';
+import { ThemeTogglerComponent } from '../theme-toggler/theme-toggler.component';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, ThemeTogglerComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -26,16 +27,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   socketService = inject(SocketService);
 
   private destroy$ = new Subject<void>();
-
-  skins = [
-    { name: 'Default Blue', class: 'default-blue', hex: '#0d6efd' },
-    { name: 'Emerald', class: 'emerald-green', hex: '#198754' },
-    { name: 'Purple', class: 'vibrant-purple', hex: '#6610f2' },
-    { name: 'Hot Pink', class: 'hot-pink', hex: '#d63384' },
-    { name: 'Sunset', class: 'sunset-orange', hex: '#fd7e14' },
-    { name: 'Cyan Wave', class: 'cyan-wave', hex: '#0dcaf0' },
-    { name: 'Crimson', class: 'crimson-red', hex: '#dc3545' }
-  ];
 
   navLinks = [
     { id: 1, path: '/home', label: 'Home' },
