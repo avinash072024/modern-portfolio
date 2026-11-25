@@ -78,8 +78,6 @@ export class AppComponent implements OnInit {
         // console.log(err);
       }
     });
-
-
   }
 
   @HostListener('document:contextmenu', ['$event'])

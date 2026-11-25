@@ -51,10 +51,10 @@
         } @else {
         @for (category of filteredCategories(); track category.title) {
         <div class="category-block mb-5 pb-4" data-aos="fade-up">
-            <h3 class="category-title h5 fw-bold text-uppercase mb-4 d-flex align-items-center gap-3">
+            <h6 class="category-title h6 fw-bold text-uppercase mb-4 d-flex align-items-center gap-3">
                 <span class="title-text">{{category.title}}</span>
                 <span class="title-line"></span>
-            </h3>
+            </h6>
 
             <div class="row g-4">
                 @for (skill of category.skills; track skill.name) {

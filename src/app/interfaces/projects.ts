@@ -16,6 +16,7 @@ export interface Project {
     image: string;
     tools: string[];
     link: string,
+    showLink: boolean;
     clientName?: string;
     teamSize?: number;
 }
